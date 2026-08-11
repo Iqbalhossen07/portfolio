@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Hero {
+  id        Int      @id @default(autoincrement())
+  cvText    String   @default("Download CV")
+  cvLink    String?
+  cvFileId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id              Int      @id @default(autoincrement())
+  userName        String
+  userEmail       String
+  userPhone       String
+  userDescription String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Project {
+  id                  Int      @id @default(autoincrement())
+  title               String
+  type                String?
+  liveLink            String?
+  githubLink          String?
+  shortDescription    String?  @db.Text
+  mainImageUrl        String
+  mainImageId         String
+  category            String
+  year                String?
+  duration            String?
+  problemTitle        String?
+  problemDescription  String?  @db.Text
+  problemPoints       Json?
+  solutionTitle       String?
+  solutionDescription String?  @db.Text
+  solutionPoints      Json?
+  techs               Json?
+  features            Json?
+  gallery             Json?
+  results             Json?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fullName  String?  @default("Admin")
+  email     String   @unique
+  password  String
+  avatar    String?  @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
