@@ -172,7 +172,7 @@ const Hero = () => {
           </div>
           <div className="flex items-center justify-between">
             <span className="text-md font-black text-[var(--text-primary)]">
-              20+
+              18+
             </span>
             <span className="text-[10px] text-[var(--text-muted)]">
               completed
@@ -219,7 +219,7 @@ const Hero = () => {
 
         <h1 className="text-xl md:text-4xl font-black leading-[1.1] tracking-tight mb-8 max-w-4xl mx-auto text-white">
           <span>Hi, I'm Iqbal —</span>
-          <br className="hidden md:block" />
+          <br />
           <span
             style={{
               display: "inline",
