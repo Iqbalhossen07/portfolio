@@ -84,7 +84,7 @@ const Projects = () => {
             >
               <div className={`grid grid-cols-1 ${pi === 0 ? "lg:grid-cols-2" : "lg:grid-cols-1"} items-center`}>
                 {/* Project Image */}
-                <div className={`relative overflow-hidden ${pi === 0 ? "h-[250px] md:h-[350px] lg:h-[480px]" : "h-[250px] md:h-[300px]"}`}>
+                <div className={`relative overflow-hidden ${pi === 0 ? "h-[250px] md:h-[350px] lg:h-[480px]" : "h-[200px] md:h-[220px]"}`}>
                   <img
                     src={p.mainImageUrl || "https://images.unsplash.com/photo-1573496130407-57329f01f769?q=80&w=1169"}
                     alt={p.title}
@@ -105,7 +105,7 @@ const Projects = () => {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-8 md:p-12 lg:p-16 relative">
+                <div className={`p-6 md:p-8 ${pi === 0 ? "lg:p-16" : ""} relative`}>
                   <div className="flex items-center gap-2 mb-6">
                     <span
                       className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[10px] font-black"
@@ -120,10 +120,10 @@ const Projects = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-xl md:text-3xl  font-black text-white mb-4 leading-tight">
+                  <h3 className={`font-black text-white mb-4 leading-tight ${pi === 0 ? "text-xl md:text-3xl" : "text-lg md:text-xl"}`}>
                     {p.title}
                   </h3>
-                  <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-8 max-w-md">
+                  <p className={`text-slate-400 leading-relaxed mb-8 max-w-md ${pi === 0 ? "text-sm md:text-lg" : "text-xs md:text-sm"}`}>
                     {p.shortDescription || p.type}
                   </p>
 
