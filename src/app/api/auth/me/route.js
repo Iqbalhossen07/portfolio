@@ -15,7 +15,15 @@ export async function GET(req) {
 
     const { payload } = await jwtVerify(token, SECRET_KEY);
 
-    return NextResponse.json({ user: payload }, { status: 200 });
+    // Fetch fresh user data from DB to ensure avatar and name are up-to-date
+    const { PrismaClient } = await import('@prisma/client');
+    const prisma = new PrismaClient();
+    const dbUser = await prisma.user.findUnique({
+      where: { id: payload.id },
+      select: { id: true, email: true, fullName: true, avatar: true }
+    });
+
+    return NextResponse.json({ user: dbUser || payload }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ user: null }, { status: 401 });
   }
