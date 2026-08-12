@@ -1,9 +1,22 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Topbar() {
   const pathname = usePathname();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) {
+          setUser(data.user);
+        }
+      })
+      .catch((err) => console.error("Failed to fetch user", err));
+  }, []);
   
   // Format pathname to display a nice title
   const getPageTitle = () => {
@@ -25,11 +38,16 @@ export default function Topbar() {
         </div>
 
         <button className="flex items-center gap-3 hover:bg-white/5 px-3 py-2 rounded-md transition-colors border border-transparent hover:border-white/5">
-          <div className="w-8 h-8 rounded-full bg-teal-500/20 border border-teal-500/50 flex items-center justify-center text-teal-400 font-black">
-            IQ
-          </div>
+          {user?.avatar ? (
+            <img src={user.avatar} alt="Admin Avatar" className="w-8 h-8 rounded-full border border-teal-500/50 object-cover" />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-teal-500/20 border border-teal-500/50 flex items-center justify-center text-teal-400 font-black">
+              {user?.fullName ? user.fullName.charAt(0).toUpperCase() : "IQ"}
+            </div>
+          )}
+          
           <div className="text-left hidden sm:block">
-            <div className="text-sm font-bold text-white">Iqbal Hossen</div>
+            <div className="text-sm font-bold text-white">{user?.fullName || "Iqbal Hossen"}</div>
             <div className="text-xs text-slate-500">Super Admin</div>
           </div>
           <i className="fa-solid fa-chevron-down text-xs text-slate-500 ml-2 hidden sm:block"></i>

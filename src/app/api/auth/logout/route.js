@@ -1,0 +1,21 @@
+import { NextResponse } from "next/server";
+
+export async function POST() {
+  const response = NextResponse.json(
+    { message: "Logout successful." },
+    { status: 200 }
+  );
+
+  // Clear the auth_token cookie
+  response.cookies.set({
+    name: "auth_token",
+    value: "",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+    maxAge: 0,
+  });
+
+  return response;
+}

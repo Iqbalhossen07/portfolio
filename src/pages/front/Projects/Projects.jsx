@@ -58,7 +58,7 @@ const ProjectsPage = () => {
                 Featured Portfolio
               </span>
             </div>
-            <h2 className="text-3xl md:text-[54px] font-black text-white leading-[1.1] tracking-tight mb-4">
+            <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4">
               Projects That{" "}
               <span
                 style={{
@@ -156,7 +156,7 @@ const ProjectsPage = () => {
 
                       <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
                         <Link href={`/project-details/${p.id}`}
-                          className="inline-flex items-center gap-2 px-5 py-2 rounded-md font-black text-xs text-white transition-all duration-300 hover:scale-105"
+                          className="inline-flex items-center gap-2 px-5 py-2  font-black text-xs text-white transition-all duration-300 hover:scale-105"
                           style={{
                             background: `linear-gradient(135deg, ${accentColor}, ${accentColor}cc)`,
                           }}
@@ -222,7 +222,7 @@ const ProjectsPage = () => {
               }}
             ></div>
             <div className="relative z-10">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white mb-3">
+              <h2 className="text-xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white mb-3">
                 Let's work together.
               </h2>
               <p className="text-slate-400 text-base mb-8 max-w-md mx-auto leading-relaxed">
@@ -231,7 +231,8 @@ const ProjectsPage = () => {
               </p>
               <div className="flex flex-row items-center justify-center gap-2 md:gap-3 w-full px-2">
                 <Link href="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 rounded-md font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 
+                   font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
                   style={{
                     background: "linear-gradient(135deg, #14b8a6, #0d9488)",
                     boxShadow: "0 6px 20px rgba(20, 184, 166, 0.3)",
@@ -242,7 +243,8 @@ const ProjectsPage = () => {
                   <span className="whitespace-nowrap">Get in Touch</span>
                 </Link>
                 <Link href="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 rounded-md font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 r
+                   font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: "1px solid rgba(255,255,255,0.08)",

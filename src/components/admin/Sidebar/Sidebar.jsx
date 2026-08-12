@@ -1,10 +1,32 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/auth/logout", { method: "POST" });
+      if (res.ok) {
+        Swal.fire({
+          title: "Logged out!",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/login");
+        router.refresh();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const navItems = [
     { label: "Dashboard", href: "/iqbal_07", icon: "fa-solid fa-chart-line" },
@@ -49,6 +71,13 @@ export default function Sidebar() {
           <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           View Live Site
         </Link>
+        <button 
+          onClick={handleLogout} 
+          className="mt-2 flex items-center justify-center gap-2 w-full py-2.5 rounded-md bg-red-500/10 hover:bg-red-500/20 text-red-400 text-sm font-bold transition-all border border-red-500/20"
+        >
+          <i className="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+          Logout
+        </button>
       </div>
     </aside>
   );
