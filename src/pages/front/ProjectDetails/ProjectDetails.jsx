@@ -1,207 +1,126 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { getIconClass } from "@/lib/iconUtils";
 import { useParams } from "next/navigation";
-import Breadcrumb from "../Projects/Breadcrumb/Breadcrumb"; // আগের ব্রেডক্রাম্ব ইমপোর্ট
-
+import Breadcrumb from "../Projects/Breadcrumb/Breadcrumb";
 
 const ProjectDetails = () => {
-  // const { id } = useParams(); // URL থেকে id নিতে চাইলে
+  const { id } = useParams();
+  const [projectData, setProjectData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  // ডামি ডেটা (DB থেকে আসবে)
+  useEffect(() => {
+    if (!id) return;
+    const fetchProject = async () => {
+      try {
+        const res = await fetch(`/api/projects/${id}`);
+        if (!res.ok) throw new Error("Project not found");
+        const data = await res.json();
+        setProjectData(data);
+      } catch (error) {
+        console.error("Failed to fetch project", error);
+        setProjectData(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProject();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#050505]">
+        <div className="text-center">
+           <div className="w-16 h-16 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+           <p className="text-slate-400 font-bold tracking-wider">LOADING PROJECT...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!projectData) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#050505] text-white">
+        <h1 className="text-4xl font-black mb-4">404 - Project Not Found</h1>
+        <Link href="/projects" className="text-teal-400 hover:underline font-bold">Back to Projects</Link>
+      </div>
+    );
+  }
+
+  const parseJson = (val, defaultVal = []) => {
+    if (!val) return defaultVal;
+    if (typeof val === "string") {
+      try { return JSON.parse(val); } catch(e) { return defaultVal; }
+    }
+    return val;
+  };
+
+  const problemPoints = parseJson(projectData.problemPoints);
+  const solutionPoints = parseJson(projectData.solutionPoints);
+  const techStack = parseJson(projectData.techs);
+  const whatIDid = parseJson(projectData.features);
+  const results = parseJson(projectData.results);
+  const gallery = parseJson(projectData.gallery);
+
   const project = {
-    title: "E-Commerce Platform",
-    tagline: "A full-stack multi-vendor marketplace built for scale.",
-    category: "Full Stack Web App",
-    year: "2024",
-    duration: "6 Weeks",
-    status: "Live",
-    cover:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=85&auto=format",
-    live_url: "#",
-    github_url: "#",
+    title: projectData.title,
+    tagline: projectData.shortDescription || "",
+    category: projectData.type || projectData.category || "Project",
+    year: projectData.year || new Date().getFullYear().toString(),
+    duration: projectData.duration || "",
+    status: projectData.liveLink ? "Live" : "Completed",
+    cover: projectData.mainImageUrl || "",
+    live_url: projectData.liveLink || "#",
+    github_url: projectData.githubLink || "#",
     gfrom: "#3b82f6",
     gto: "#7c3aed",
     glow: "rgba(59,130,246,0.4)",
-
     problem: {
-      headline: "A growing business stuck on a broken platform.",
-      body: "The client was running their multi-vendor marketplace on an outdated WordPress + WooCommerce setup that couldn't handle their growth. Page load times were exceeding 8 seconds, checkout failures were occurring daily, and the admin had no real-time visibility into sales or inventory across vendors. They were losing customers and revenue — every single day.",
-      pains: [
-        "8s+ page load times killing conversions",
-        "Checkout failing under moderate traffic",
-        "No real-time inventory tracking",
-        "Zero vendor analytics or reporting",
-        "Manual order management eating hours",
-      ],
+      headline: projectData.problemTitle || "The Problem",
+      body: projectData.problemDescription || "",
+      pains: problemPoints,
     },
-
     solution: {
-      headline: "A custom-built platform, designed for performance.",
-      body: "I designed and built a completely new full-stack marketplace from the ground up — a React frontend served by a Laravel API backend, with MySQL for relational data and Redis for caching. The architecture was built to handle traffic spikes, support multiple vendors independently, and give every stakeholder the visibility they needed.",
-      decisions: [
-        {
-          icon: "fa-bolt",
-          title: "Server-side caching",
-          desc: "Redis caching on product and category queries — sub-100ms response times.",
-        },
-        {
-          icon: "fa-layer-group",
-          title: "Decoupled architecture",
-          desc: "React SPA frontend + REST API backend — independently scalable.",
-        },
-        {
-          icon: "fa-shield",
-          title: "Secure payments",
-          desc: "Stripe integration with webhook verification and idempotency keys.",
-        },
-        {
-          icon: "fa-chart-bar",
-          title: "Real-time dashboard",
-          desc: "Live sales, inventory, and vendor analytics via polling + SSE.",
-        },
-      ],
+      headline: projectData.solutionTitle || "The Solution",
+      body: projectData.solutionDescription || "",
+      points: solutionPoints,
     },
-
-    tech_stack: [
-      {
-        name: "React.js",
-        icon: "fa-react",
-        role: "Frontend UI",
-        color: "#61DAFB",
-        bg: "rgba(97,218,251,0.10)",
-      },
-      {
-        name: "Laravel",
-        icon: "fa-laravel",
-        role: "Backend API",
-        color: "#FF2D20",
-        bg: "rgba(255,45,32,0.10)",
-      },
-      {
-        name: "MySQL",
-        icon: "fa-database",
-        role: "Primary Database",
-        color: "#4479A1",
-        bg: "rgba(68,121,161,0.10)",
-      },
-      {
-        name: "Redis",
-        icon: "fa-bolt",
-        role: "Caching Layer",
-        color: "#DC382D",
-        bg: "rgba(220,56,45,0.10)",
-      },
-      {
-        name: "Stripe",
-        icon: "fa-cc-stripe",
-        role: "Payments",
-        color: "#635BFF",
-        bg: "rgba(99,91,255,0.10)",
-      },
-      {
-        name: "Tailwind CSS",
-        icon: "fa-wind",
-        role: "Styling",
-        color: "#06B6D4",
-        bg: "rgba(6,182,212,0.10)",
-      },
-      {
-        name: "AWS S3",
-        icon: "fa-aws",
-        role: "Media Storage",
-        color: "#FF9900",
-        bg: "rgba(255,153,0,0.10)",
-      },
-      {
-        name: "GitHub CI/CD",
-        icon: "fa-github",
-        role: "Deployment",
-        color: "#ffffff",
-        bg: "rgba(255,255,255,0.06)",
-      },
-    ],
-
-    what_i_did: [
-      {
-        num: "01",
-        icon: "fa-sitemap",
-        title: "Architecture & Database Design",
-        desc: "Designed the full system architecture and normalized MySQL schema supporting multi-vendor relationships, product variants, order lifecycle, and role-based access for admins, vendors, and customers.",
-        gfrom: "#3b82f6",
-        gto: "#06b6d4",
-      },
-      {
-        num: "02",
-        icon: "fa-server",
-        title: "REST API Development",
-        desc: "Built 40+ API endpoints in Laravel covering auth (JWT), product management, cart, checkout, order tracking, and vendor dashboards — all documented with Swagger.",
-        gfrom: "#7c3aed",
-        gto: "#a855f7",
-      },
-      {
-        num: "03",
-        icon: "fa-display",
-        title: "React Frontend",
-        desc: "Developed a fully responsive SPA with React — product listing with filters, cart, multi-step checkout, customer dashboard, and a real-time vendor panel with live charts.",
-        gfrom: "#10b981",
-        gto: "#059669",
-      },
-      {
-        num: "04",
-        icon: "fa-credit-card",
-        title: "Stripe Payment Integration",
-        desc: "Integrated Stripe Checkout with webhook handling, automatic vendor payouts via Stripe Connect, refund flows, and payment failure recovery.",
-        gfrom: "#635BFF",
-        gto: "#a78bfa",
-      },
-      {
-        num: "05",
-        icon: "fa-rocket",
-        title: "Deployment & CI/CD",
-        desc: "Set up AWS EC2 + S3, configured Nginx, SSL, and built a GitHub Actions CI/CD pipeline for zero-downtime deployments on every push to main.",
-        gfrom: "#ec4899",
-        gto: "#f97316",
-      },
-    ],
-
-    results: [
-      {
-        num: "94%",
-        label: "Faster Load Time",
-        desc: "8s → under 500ms",
-        gfrom: "#3b82f6",
-        gto: "#06b6d4",
-      },
-      {
-        num: "40%",
-        label: "Revenue Increase",
-        desc: "First month post-launch",
-        gfrom: "#10b981",
-        gto: "#059669",
-      },
-      {
-        num: "0",
-        label: "Checkout Failures",
-        desc: "vs daily failures before",
-        gfrom: "#7c3aed",
-        gto: "#a855f7",
-      },
-      {
-        num: "10x",
-        label: "Traffic Capacity",
-        desc: "Handles 10x more load",
-        gfrom: "#f59e0b",
-        gto: "#f97316",
-      },
-    ],
-
-    gallery: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format",
-      "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&q=80&auto=format",
-    ],
+    tech_stack: techStack.map(t => ({
+      name: t.name,
+      icon: t.icon,
+      role: "", 
+      color: "#14b8a6", 
+      bg: "rgba(20,184,166,0.1)", 
+    })),
+    what_i_did: whatIDid.map((f, i) => {
+      const gradients = [
+        { from: "#3b82f6", to: "#06b6d4" },
+        { from: "#7c3aed", to: "#a855f7" },
+        { from: "#10b981", to: "#059669" },
+        { from: "#f59e0b", to: "#ea580c" },
+        { from: "#ec4899", to: "#be185d" },
+      ];
+      const g = gradients[i % gradients.length];
+      return {
+        num: String(i + 1).padStart(2, "0"),
+        icon: f.icon,
+        title: f.title,
+        desc: f.description,
+        gfrom: g.from,
+        gto: g.to,
+      };
+    }),
+    gallery: gallery.map(img => img.url),
+    results: results.map(r => ({
+      num: r.stats,
+      label: r.heading,
+      desc: r.description,
+      gfrom: "#3b82f6",
+      gto: "#06b6d4",
+    }))
   };
 
   const metas = [
@@ -213,10 +132,8 @@ const ProjectDetails = () => {
 
   return (
     <main className=" min-h-screen">
-      {/* Breadcrumb (যদি চান রাখতে পারেন, আমি স্কিপ করে ডিরেক্ট হিরোতে যাচ্ছি) */}
       <Breadcrumb title={project.title} pageName="Project Details" />
 
-      {/* Ambient glows */}
       <div
         className="fixed top-0 right-0 w-[700px] h-[700px] rounded-none blur-[220px] pointer-events-none opacity-[0.08] -z-0"
         style={{ background: project.gfrom }}
@@ -227,7 +144,6 @@ const ProjectDetails = () => {
       ></div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-10 md:py-20 relative z-10 flex flex-col gap-24">
-        {/* ==================== COVER + META ==================== */}
         <div className="flex flex-col gap-6 md:gap-8">
           <div
             className="relative rounded-md overflow-hidden group"
@@ -477,7 +393,7 @@ const ProjectDetails = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {project.solution.decisions.map((d, idx) => (
+            {project.solution.points && project.solution.points.map((p, idx) => (
               <div
                 key={idx}
                 className="flex gap-4 p-5 rounded-md relative overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
@@ -495,14 +411,11 @@ const ProjectDetails = () => {
                       "0 4px 14px rgba(20, 184, 166, 0.25), 0 1px 0 rgba(255,255,255,0.2) inset",
                   }}
                 >
-                  <i className={`fa-solid ${d.icon} text-white text-sm`}></i>
+                  <i className={`fa-solid fa-check text-white text-sm`}></i>
                 </div>
-                <div className="min-w-0">
-                  <div className="text-sm font-black text-white mb-1 truncate">
-                    {d.title}
-                  </div>
-                  <div className="text-xs text-slate-500 leading-relaxed">
-                    {d.desc}
+                <div className="min-w-0 flex items-center">
+                  <div className="text-sm text-slate-300 leading-relaxed">
+                    {p}
                   </div>
                 </div>
               </div>
@@ -559,8 +472,8 @@ const ProjectDetails = () => {
                   }}
                 >
                   <i
-                    className={`${tech.icon.startsWith("fa-") ? (tech.icon.includes("react") || tech.icon.includes("laravel") || tech.icon.includes("aws") || tech.icon.includes("github") ? "fa-brands " : "fa-solid ") : "fa-brands "}${tech.icon} text-xl`}
-                    style={{ color: tech.color }}
+                    className={`${getIconClass(tech.icon)} text-[28px]`}
+                    style={{ color: "#14b8a6" }}
                   ></i>
                 </div>
                 <div>
@@ -629,7 +542,7 @@ const ProjectDetails = () => {
                       boxShadow: `0 6px 18px ${wi.gfrom}44, 0 1px 0 rgba(255,255,255,0.2) inset`,
                     }}
                   >
-                    <i className={`fa-solid ${wi.icon} text-white text-sm`}></i>
+                    <i className={`${getIconClass(wi.icon)} text-white text-sm`}></i>
                   </div>
                   <span
                     className="text-[10px] font-black tracking-widest uppercase"
@@ -686,18 +599,21 @@ const ProjectDetails = () => {
               {project.gallery.map((img, idx) => (
                 <div
                   key={idx}
-                  className="rounded-md overflow-hidden group relative transition-all duration-300 hover:border-white/20"
+                  onClick={() => setSelectedImage(img)}
+                  className="rounded-md overflow-hidden group relative transition-all duration-300 hover:border-white/20 cursor-pointer"
                   style={{
                     background: "rgba(255,255,255,0.02)",
                     border: "1px solid rgba(255,255,255,0.06)",
                     boxShadow: "0 16px 40px rgba(0,0,0,0.4)",
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 flex items-center justify-center">
+                    <i className="fa-solid fa-magnifying-glass-plus text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0"></i>
+                  </div>
                   <img
                     src={img}
                     alt="Screenshot"
-                    className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-110 relative z-0"
                   />
                 </div>
               ))}
@@ -748,24 +664,24 @@ const ProjectDetails = () => {
               >
                 <div
                   className="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{ boxShadow: `inset 0 0 0 1px ${r.gfrom}44` }}
+                  style={{ boxShadow: `inset 0 0 0 1px ${r.gfrom || '#14b8a6'}44` }}
                 ></div>
                 <div
                   className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black mb-1"
                   style={{
-                    background: `linear-gradient(135deg, ${r.gfrom}, ${r.gto})`,
+                    background: `linear-gradient(135deg, ${r?.gfrom || '#14b8a6'}, ${r?.gto || '#059669'})`,
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
                   }}
                 >
-                  {r.num}
+                  {r?.stats || r?.num || r?.heading || (typeof r === 'string' ? r : '')}
                 </div>
                 <div className="text-sm font-black text-white mb-1 group-hover:text-teal-400 transition-colors duration-200">
-                  {r.label}
+                  {r?.heading || r?.label || ''}
                 </div>
                 <div className="text-[10px] md:text-[11px] text-slate-500 font-bold uppercase tracking-wider">
-                  {r.desc}
+                  {r?.description || r?.desc || ''}
                 </div>
               </div>
             ))}
@@ -836,6 +752,29 @@ const ProjectDetails = () => {
           </Link>
         </div>
       </div>
+      {/* LIGHTBOX MODAL */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 bg-black/90 backdrop-blur-md transition-all duration-300 opacity-100"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-6xl w-full max-h-full flex items-center justify-center">
+            <button 
+              onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+              className="absolute -top-12 right-0 md:-right-12 text-white/50 hover:text-white transition-colors text-4xl font-black focus:outline-none"
+            >
+              &times;
+            </button>
+            <img 
+              src={selectedImage} 
+              alt="Enlarged screenshot" 
+              className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
+
     </main>
   );
 };

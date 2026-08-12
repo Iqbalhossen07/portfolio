@@ -91,7 +91,7 @@ export default function ProjectsList() {
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Link href={`/project-details/${project.id}`} target="_blank" className="w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors" title="View Public Page">
+                        <Link href={`/iqbal_07/projects/${project.id}/details`} className="w-8 h-8 rounded-md bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors" title="View Details">
                           <i className="fa-solid fa-eye text-xs"></i>
                         </Link>
                         <Link href={`/iqbal_07/projects/${project.id}`} className="w-8 h-8 rounded-md bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 flex items-center justify-center transition-colors" title="Edit">

@@ -55,7 +55,7 @@ const Projects = () => {
               Featured Portfolio
             </span>
           </div>
-          <h2 className="text-3xl md:text-[54px] font-black text-white leading-[1.1] tracking-tight mb-4">
+          <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4">
             Projects That{" "}
             <span
               style={{
@@ -120,7 +120,7 @@ const Projects = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white mb-4 leading-tight">
+                  <h3 className="text-xl md:text-3xl  font-black text-white mb-4 leading-tight">
                     {p.title}
                   </h3>
                   <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-8 max-w-md">
@@ -133,7 +133,8 @@ const Projects = () => {
                         key={i}
                         className="px-3 py-1.5 rounded-md text-[10px] font-bold border border-white/5 bg-white/5 text-slate-500"
                       >
-                        {tag}
+                        {tag.icon && <i className={`${tag.icon} mr-1`}></i>}
+                        {tag.name || tag}
                       </span>
                     ))}
                   </div>
@@ -141,7 +142,7 @@ const Projects = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Link href={`/project-details/${p.id}`}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md text-xs font-black text-white transition-all duration-300 hover:scale-105 active:scale-95"
+                        className="inline-flex items-center gap-2 px-6 py-2.5  text-xs font-black text-white transition-all duration-300 hover:scale-105 active:scale-95"
                         style={{
                           background: `linear-gradient(135deg, #14b8a6, #0d9488)`,
                           boxShadow: `0 10px 20px -5px rgba(20, 184, 166, 0.3)`,
@@ -165,7 +166,7 @@ const Projects = () => {
 
                       {p.liveLink && (
                         <a href={p.liveLink} target="_blank" rel="noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md text-xs font-black text-slate-300 transition-all duration-300 hover:text-white hover:bg-white/10"
+                          className="inline-flex items-center gap-2 px-4 py-2.5  text-xs font-black text-slate-300 transition-all duration-300 hover:text-white hover:bg-white/10"
                           style={{ border: "1px solid rgba(255,255,255,0.1)" }}
                         >
                           <i className="fa-solid fa-arrow-up-right-from-square"></i> Live

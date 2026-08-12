@@ -4,10 +4,10 @@ import { uploadToCloudinary, deleteFromCloudinary } from "@/lib/cloudinary";
 
 export async function GET(request, { params }) {
   try {
-    const id = parseInt(params.id);
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id);
     const project = await prisma.project.findUnique({
-      where: { id },
-      include: { testimonials: true }
+      where: { id }
     });
 
     if (!project) {
@@ -23,7 +23,8 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const id = parseInt(params.id);
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id);
     const existingProject = await prisma.project.findUnique({ where: { id } });
 
     if (!existingProject) {
@@ -69,16 +70,31 @@ export async function PUT(request, { params }) {
       mainImageId = upload.public_id;
     }
 
-    // Process Gallery
-    let gallery = existingProject.gallery || [];
-    const galleryFiles = formData.getAll("gallery");
-    if (galleryFiles.length > 0) {
-      for (const file of galleryFiles) {
-        if (typeof file !== "string") {
-          const buffer = Buffer.from(await file.arrayBuffer());
-          const upload = await uploadToCloudinary(buffer, "portfolio/projects");
-          gallery.push({ url: upload.secure_url, id: upload.public_id });
-        }
+    // Handle gallery retention and deletion
+    const retainedGallery = formData.get("retainedGallery") ? JSON.parse(formData.get("retainedGallery")) : [];
+    const deletedGalleryIds = formData.get("deletedGalleryIds") ? JSON.parse(formData.get("deletedGalleryIds")) : [];
+    
+    // Delete removed images from cloudinary
+    for (const publicId of deletedGalleryIds) {
+      if (publicId) await deleteFromCloudinary(publicId);
+    }
+
+    const galleryFiles = formData.getAll("galleryFiles");
+    const galleryCaptions = formData.getAll("galleryCaptions");
+    let galleryUploads = [...retainedGallery];
+    
+    // Append new files
+    for (let i = 0; i < galleryFiles.length; i++) {
+      const file = galleryFiles[i];
+      const caption = galleryCaptions[i] || "";
+      if (typeof file !== "string") {
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const upload = await uploadToCloudinary(buffer, "portfolio/projects");
+        galleryUploads.push({
+          url: upload.secure_url,
+          id: upload.public_id,
+          caption: caption
+        });
       }
     }
 
@@ -88,7 +104,7 @@ export async function PUT(request, { params }) {
         title, type, category, liveLink, githubLink, shortDescription,
         year, duration, problemTitle, problemDescription, solutionTitle, solutionDescription,
         problemPoints, solutionPoints, techs, features, results,
-        mainImageUrl, mainImageId, gallery
+        mainImageUrl, mainImageId, gallery: galleryUploads
       },
     });
 
@@ -101,7 +117,8 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const id = parseInt(params.id);
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id);
     const project = await prisma.project.findUnique({ where: { id } });
 
     if (!project) {

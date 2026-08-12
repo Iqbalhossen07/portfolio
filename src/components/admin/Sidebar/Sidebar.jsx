@@ -10,6 +10,7 @@ export default function Sidebar() {
     { label: "Dashboard", href: "/iqbal_07", icon: "fa-solid fa-chart-line" },
     { label: "Hero Settings", href: "/iqbal_07/hero", icon: "fa-solid fa-home" },
     { label: "Projects", href: "/iqbal_07/projects", icon: "fa-solid fa-briefcase" },
+    { label: "Platforms", href: "/iqbal_07/platforms", icon: "fa-solid fa-layer-group" },
     { label: "Messages", href: "/iqbal_07/messages", icon: "fa-solid fa-envelope" },
     { label: "Settings", href: "/iqbal_07/settings", icon: "fa-solid fa-cog" },
   ];
@@ -25,7 +26,7 @@ export default function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
         {navItems.map((item, idx) => {
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || (item.href !== "/iqbal_07" && pathname.startsWith(item.href + "/"));
           return (
             <Link
               key={idx}

@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: var(--font-merriweather), serif;
 }
+
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-logo-marquee {
+  animation: logo-marquee 20s linear infinite;
+  display: flex;
+  width: max-content;
+}

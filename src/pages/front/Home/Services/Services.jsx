@@ -151,7 +151,7 @@ const Services = () => {
               What I Offer
             </span>
           </div>
-          <h2 className="text-3xl md:text-[54px] font-black text-white leading-[1.1] tracking-tight mb-4">
+          <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4">
             Services Built for{" "}
             <span
               style={{
@@ -164,7 +164,7 @@ const Services = () => {
               Results
             </span>
           </h2>
-          <p className="text-slate-400 text-sm md:text-lg max-w-lg leading-relaxed px-2">
+          <p className="text-slate-400 text-sm md:text-lg max-w-2xl leading-relaxed px-2">
             Every service I offer is designed with one goal in mind — to make
             your digital presence stronger, faster, and more impactful.
           </p>

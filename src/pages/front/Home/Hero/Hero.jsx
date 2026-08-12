@@ -242,7 +242,7 @@ const Hero = () => {
 
         <div className="flex flex-row flex-wrap items-center justify-center gap-3 w-full px-4 max-w-xl sm:max-w-none">
           <a href={heroData?.cvLink || "#"} download target="_blank" rel="noreferrer"
-            className="group relative flex-1 sm:flex-none px-6 py-2.5 rounded-md font-black transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+            className="group relative flex-1 sm:flex-none px-6 py-2.5  font-black transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
             style={{
               background: "rgba(255, 255, 255, 0.1)",
               color: "#ffffff",
@@ -257,7 +257,7 @@ const Hero = () => {
           </a>
 
           <Link href="/projects"
-            className="group relative flex-1 sm:flex-none px-5 py-2.5 rounded-md font-black transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+            className="group relative flex-1 sm:flex-none px-5 py-2.5  font-black transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
             style={{
               background: "linear-gradient(135deg, #14b8a6, #0d9488)",
               color: "#ffffff",
@@ -284,33 +284,7 @@ const Hero = () => {
             </svg>
           </Link>
 
-          <Link href="/contact"
-            className="group relative flex-1 sm:flex-none px-5 py-2.5 rounded-md font-black transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-            style={{
-              background: "linear-gradient(135deg, #f97316, #ea580c)",
-              color: "#ffffff",
-              boxShadow:
-                "0 4px 15px rgba(249, 115, 22, 0.3), 0 1px 0 rgba(255,255,255,0.2) inset",
-              border: "1px solid rgba(255,255,255,0.1)",
-            }}
-          >
-            <span className="text-sm md:text-base whitespace-nowrap">
-              Contact
-            </span>
-            <svg
-              className="w-4 h-4 transition-all group-hover:rotate-12"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2.5"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-          </Link>
+          
         </div>
       </div>
     </section>

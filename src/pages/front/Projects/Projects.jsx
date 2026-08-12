@@ -1,33 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Breadcrumb from "./Breadcrumb/Breadcrumb"; // পাথ নিশ্চিত করুন
 
-
 const ProjectsPage = () => {
-  const projects = [
-    {
-      title: "Mountenna Recruitment",
-      desc: "A high-fidelity job board and applicant tracking platform built for the UK staffing industry with real-time matching.",
-      img: "https://images.unsplash.com/photo-1573496130407-57329f01f769?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["PHP", "Laravel", "MySQL", "Tailwind"],
-      live: "/project/1",
-      year: "2025",
-      status: "Live Project",
-      accent: "#14b8a6",
-    },
-    {
-      title: "Stonebridge Legal",
-      desc: "Digital transformation for a UK law firm, transitioning from manual bookings to an automated web solution.",
-      img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
-      tags: ["PHP", "MySQL", "JavaScript"],
-      live: "/project/2",
-      year: "2024",
-      status: "Live Project",
-      accent: "#f97316",
-    },
-  ];
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch("/api/projects");
+        const data = await res.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   return (
     <main className="min-h-screen overflow-hidden">
@@ -80,101 +74,119 @@ const ProjectsPage = () => {
           </div>
 
           <div className="flex flex-col gap-6 md:gap-10">
-            {projects.map((p, pi) => (
-              <div
-                key={pi}
-                className="group relative rounded-md overflow-hidden transition-all duration-500 hover:scale-[1.005]"
-                style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
-                }}
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
-                  <div className="relative h-[250px] md:h-[350px] lg:h-[480px] overflow-hidden">
-                    <img
-                      src={p.img}
-                      alt={p.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-                    <div className="absolute top-6 left-6">
-                      <span
-                        className="px-3 py-1.5 rounded-md text-[10px] font-black text-white backdrop-blur-md"
-                        style={{
-                          background: "rgba(0,0,0,0.5)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                        }}
-                      >
-                        ★ {p.year} PROJECT
-                      </span>
-                    </div>
-                  </div>
+            {loading ? (
+              <div className="text-center py-20">
+                 <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                 <p className="text-slate-400 font-bold tracking-wider">LOADING PROJECTS...</p>
+              </div>
+            ) : projects.length === 0 ? (
+              <div className="text-center py-20 text-slate-500 font-bold">No projects found.</div>
+            ) : projects.map((p, pi) => {
+              const accentColor = pi % 2 === 0 ? "#14b8a6" : "#f97316";
+              
+              // Process tags (first 4 techs)
+              let tags = [];
+              try {
+                 const techsArray = Array.isArray(p.techs) ? p.techs : (p.techs ? JSON.parse(p.techs) : []);
+                 tags = techsArray.slice(0, 4).map(t => t.name);
+              } catch(e) {}
 
-                  <div className="p-8 md:p-12 lg:p-16 relative">
-                    <div className="flex items-center gap-2 mb-6">
-                      <span
-                        className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[10px] font-black"
-                        style={{
-                          background: "rgba(20, 184, 166, 0.1)",
-                          border: "1px solid rgba(20, 184, 166, 0.2)",
-                          color: "#2dd4bf",
-                        }}
-                      >
-                        <span className="w-1.5 h-1.5 rounded-none bg-teal-400 animate-pulse"></span>
-                        {p.status}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white mb-4 leading-tight">
-                      {p.title}
-                    </h3>
-                    <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-8 max-w-md">
-                      {p.desc}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-10">
-                      {p.tags.map((tag, i) => (
+              return (
+                <div
+                  key={p.id}
+                  className="group relative rounded-md overflow-hidden transition-all duration-500 hover:scale-[1.005]"
+                  style={{
+                    background: "rgba(255,255,255,0.02)",
+                    border: "1px solid rgba(255,255,255,0.06)",
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                  }}
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
+                    <div className="relative h-[250px] md:h-[350px] lg:h-[480px] overflow-hidden">
+                      <img
+                        src={p.mainImageUrl}
+                        alt={p.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
+                      <div className="absolute top-6 left-6">
                         <span
-                          key={i}
-                          className="px-3 py-1.5 rounded-md text-[10px] font-bold border border-white/5 bg-white/5 text-slate-500"
+                          className="px-3 py-1.5 rounded-md text-[10px] font-black text-white backdrop-blur-md"
+                          style={{
+                            background: "rgba(0,0,0,0.5)",
+                            border: "1px solid rgba(255,255,255,0.1)",
+                          }}
                         >
-                          {tag}
+                          ★ {p.year || new Date().getFullYear()} PROJECT
                         </span>
-                      ))}
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <Link href={`/project-details/${p.id || 1}`} // এখানে p.id ব্যবহার করুন, আইডি না থাকলে ১ এ যাবে
-                        className="inline-flex items-center gap-2 px-8 py-3 rounded-md text-xs font-black text-white transition-all duration-300 hover:scale-105 active:scale-95"
-                        style={{
-                          background: `linear-gradient(135deg, ${p.accent}, ${p.accent}ee)`,
-                          boxShadow: `0 10px 20px -5px ${p.accent}44`,
-                        }}
-                      >
-                        Project Details
-                        <svg
-                          className="w-3.5 h-3.5"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          viewBox="0 0 24 24"
+                    <div className="p-8 md:p-12 lg:p-16 relative">
+                      <div className="flex items-center gap-2 mb-6">
+                        <span
+                          className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[10px] font-black"
+                          style={{
+                            background: "rgba(20, 184, 166, 0.1)",
+                            border: "1px solid rgba(20, 184, 166, 0.2)",
+                            color: "#2dd4bf",
+                          }}
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                          />
-                        </svg>
-                      </Link>
-                      <span className="text-slate-800 font-black text-sm italic tracking-tighter">
-                        #0{pi + 1}
-                      </span>
+                          <span className="w-1.5 h-1.5 rounded-none bg-teal-400 animate-pulse"></span>
+                          {p.liveLink ? "Live Project" : "Completed"}
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white mb-4 leading-tight">
+                        {p.title}
+                      </h3>
+                      <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-8 max-w-md">
+                        {p.shortDescription}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-10">
+                        {tags.map((tag, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1.5 rounded-md text-[10px] font-bold border border-white/5 bg-white/5 text-slate-500"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <Link href={`/project-details/${p.id}`}
+                          className="inline-flex items-center gap-2 px-8 py-3 rounded-md text-xs font-black text-white transition-all duration-300 hover:scale-105 active:scale-95"
+                          style={{
+                            background: `linear-gradient(135deg, ${accentColor}, ${accentColor}ee)`,
+                            boxShadow: `0 10px 20px -5px ${accentColor}44`,
+                          }}
+                        >
+                          Project Details
+                          <svg
+                            className="w-3.5 h-3.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                            />
+                          </svg>
+                        </Link>
+                        <span className="text-slate-800 font-black text-sm italic tracking-tighter">
+                          #{String(pi + 1).padStart(2, '0')}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

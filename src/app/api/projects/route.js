@@ -22,9 +22,9 @@ export async function POST(request) {
     const formData = await request.formData();
     
     // Parse standard text fields
-    const title = formData.get("title");
+    const title = formData.get("title") || "Untitled Project";
     const type = formData.get("type") || "";
-    const category = formData.get("category");
+    const category = formData.get("category") || "Uncategorized";
     const liveLink = formData.get("liveLink") || "";
     const githubLink = formData.get("githubLink") || "";
     const shortDescription = formData.get("shortDescription") || "";
@@ -44,25 +44,31 @@ export async function POST(request) {
 
     // Parse main image
     const mainImageFile = formData.get("mainImage");
-    if (!mainImageFile || typeof mainImageFile === "string") {
-      return NextResponse.json({ error: "Main image is required" }, { status: 400 });
+    let mainImageUrl = "";
+    let mainImageId = "";
+    
+    if (mainImageFile && typeof mainImageFile !== "string") {
+      const mainImageBuffer = Buffer.from(await mainImageFile.arrayBuffer());
+      const mainImageUpload = await uploadToCloudinary(mainImageBuffer, "portfolio/projects");
+      mainImageUrl = mainImageUpload.secure_url;
+      mainImageId = mainImageUpload.public_id;
     }
 
-    // Convert file to buffer and upload
-    const mainImageBuffer = Buffer.from(await mainImageFile.arrayBuffer());
-    const mainImageUpload = await uploadToCloudinary(mainImageBuffer, "portfolio/projects");
-
     // Parse gallery images (can be multiple files)
-    const galleryFiles = formData.getAll("gallery");
+    const galleryFiles = formData.getAll("galleryFiles");
+    const galleryCaptions = formData.getAll("galleryCaptions");
     const galleryUploads = [];
     
-    for (const file of galleryFiles) {
+    for (let i = 0; i < galleryFiles.length; i++) {
+      const file = galleryFiles[i];
+      const caption = galleryCaptions[i] || "";
       if (typeof file !== "string") {
         const buffer = Buffer.from(await file.arrayBuffer());
         const upload = await uploadToCloudinary(buffer, "portfolio/projects");
         galleryUploads.push({
           url: upload.secure_url,
           id: upload.public_id,
+          caption: caption
         });
       }
     }
@@ -87,8 +93,8 @@ export async function POST(request) {
         techs,
         features,
         results,
-        mainImageUrl: mainImageUpload.secure_url,
-        mainImageId: mainImageUpload.public_id,
+        mainImageUrl,
+        mainImageId,
         gallery: galleryUploads,
       },
     });

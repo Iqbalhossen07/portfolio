@@ -66,7 +66,7 @@ const CTA = () => {
               </div>
             </div>
 
-            <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4 px-2">
+            <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4 px-2">
               Got a project in mind?
               <br className="hidden md:block" />
               <span

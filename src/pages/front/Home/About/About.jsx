@@ -103,7 +103,7 @@ const About = () => {
           {/* Right Side: Description & Experience */}
           <div className="flex flex-col gap-8 lg:pt-4">
             <div>
-              <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] mb-4">
+              <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] mb-4">
                 I build digital solutions that <br />
                 <span
                   style={{

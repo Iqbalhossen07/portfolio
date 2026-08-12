@@ -139,7 +139,7 @@ const Process = () => {
               How I Work
             </span>
           </div>
-          <h2 className="text-3xl md:text-[54px] font-black text-white leading-[1.1] tracking-tight mb-4">
+          <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4">
             From Idea to{" "}
             <span
               style={{
