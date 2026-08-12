@@ -49,12 +49,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-10">
           <Link href="/" className="inline-block mb-4">
-            <div className="w-16 h-16 mx-auto bg-gradient-to-tr from-[#00BDCA] to-[#FF592C] rounded-xl flex items-center justify-center p-0.5">
-              <div className="w-full h-full bg-[#050505] rounded-[10px] flex items-center justify-center">
-                <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00BDCA] to-[#FF592C]">
-                  IH
-                </span>
-              </div>
+            <div className="w-16 h-16 mx-auto bg-white/5 border border-white/10 rounded-xl flex items-center justify-center overflow-hidden p-1 shadow-lg shadow-white/5 hover:scale-105 transition-transform duration-300">
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </div>
           </Link>
           <h1 className="text-3xl font-black text-white tracking-tight mb-2">
