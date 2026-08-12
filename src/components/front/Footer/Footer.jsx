@@ -181,7 +181,7 @@ const Footer = () => {
           </div>
 
           <Link href="/contact"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-black text-xs text-white transition-all duration-200 hover:scale-105 flex-shrink-0"
+            className="inline-flex items-center gap-2 px-5 py-2.5 font-black text-xs text-white transition-all duration-200 hover:scale-105 flex-shrink-0"
             style={{
               background: "linear-gradient(135deg, #14b8a6, #0d9488)",
               boxShadow: "0 4px 14px rgba(20, 184, 166, 0.3)",

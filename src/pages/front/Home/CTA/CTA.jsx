@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const CTA = () => {
   const trust = [
-    { icon: "fa-bolt", c: "#14b8a6", text: "30 Minutes Response" },
-    { icon: "fa-comments", c: "#14b8a6", text: "Free Consultation" },
-    { icon: "fa-star", c: "#f97316", text: "100% Satisfaction" },
+    { icon: "fa-rocket", c: "#14b8a6", text: "Fast Learner" },
+    { icon: "fa-puzzle-piece", c: "#14b8a6", text: "Problem Solver" },
+    { icon: "fa-users", c: "#f97316", text: "Team Player" },
     { icon: "fa-calendar-check", c: "#f97316", text: "Open for Work" },
   ];
 
@@ -61,13 +61,13 @@ const CTA = () => {
               >
                 <span className="w-1.5 h-1.5 rounded-none bg-teal-400 animate-pulse inline-block"></span>
                 <span className="text-[10px] md:text-[11px] font-black text-slate-300 tracking-wider uppercase">
-                  Available for new projects
+                  Available for new opportunities
                 </span>
               </div>
             </div>
 
             <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4 px-2">
-              Got a project in mind?
+              Looking for a dedicated developer?
               <br className="hidden md:block" />
               <span
                 style={{
@@ -77,13 +77,12 @@ const CTA = () => {
                   backgroundClip: "text",
                 }}
               >
-                Let's build it together.
+                Let's build something great.
               </span>
             </h2>
 
             <p className="text-slate-400 text-sm md:text-base leading-relaxed max-w-xl mx-auto mb-10 px-4">
-              Web apps, video edits, or brand identities — I'm here to turn your
-              vision into something real. Let's make it happen.
+              From frontend interfaces to robust backend architectures — I'm ready to bring my expertise to your team and turn ideas into reality.
             </p>
 
             {/* Action Buttons */}
@@ -97,7 +96,7 @@ const CTA = () => {
                 }}
               >
                 <i className="fa-solid fa-paper-plane text-xs"></i>
-                Start a Project
+                Get in Touch
                 <i className="fa-solid fa-arrow-right text-xs"></i>
               </Link>
 
