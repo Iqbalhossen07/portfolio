@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Swal from "sweetalert2";
 import Breadcrumb from "../Contact/Breadcrumb/Breadcrumb";
 
 
@@ -71,7 +72,7 @@ const SocialLink = ({ s }) => {
 };
 
 const Contact = () => {
-  const [subject, setSubject] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const avail = [
     {
@@ -125,10 +126,59 @@ const Contact = () => {
     { icon: "fa-facebook", href: "https://www.facebook.com/iqbalhossen03", label: "Facebook", c: "#14b8a6" },
   ];
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // ফর্ম সাবমিটের এপিআই (API) কল এখানে বসবে
-    console.log("Form Submitted", { subject });
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        Swal.fire({
+          title: "Message Sent!",
+          text: "Thanks for reaching out. I'll get back to you soon.",
+          icon: "success",
+          background: "#0a0a0f",
+          color: "#fff",
+          confirmButtonColor: "#14b8a6",
+        });
+        e.target.reset();
+      } else {
+        const errorData = await res.json();
+        Swal.fire({
+          title: "Error!",
+          text: errorData.error || "Something went wrong. Please try again.",
+          icon: "error",
+          background: "#0a0a0f",
+          color: "#fff",
+          confirmButtonColor: "#f97316",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Error!",
+        text: "Network error occurred.",
+        icon: "error",
+        background: "#0a0a0f",
+        color: "#fff",
+        confirmButtonColor: "#f97316",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -283,15 +333,16 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 py-4 rounded-md font-black text-sm text-white transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] mt-2"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-md font-black text-sm text-white transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{
                   background: "linear-gradient(135deg, #14b8a6, #0d9488)",
                   boxShadow: "0 8px 24px rgba(20, 184, 166, 0.3)",
                   border: "1px solid rgba(255,255,255,0.15)",
                 }}
               >
-                <i className="fa-solid fa-paper-plane text-sm"></i>
-                <span>Send Message</span>
+                <i className={`fa-solid ${isSubmitting ? 'fa-spinner fa-spin' : 'fa-paper-plane'} text-sm`}></i>
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               </button>
             </form>
           </section>

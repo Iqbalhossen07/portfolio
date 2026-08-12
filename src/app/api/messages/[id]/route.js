@@ -3,14 +3,15 @@ import prisma from "@/lib/prisma";
 
 export async function DELETE(request, { params }) {
   try {
-    const id = parseInt(params.id);
-    const message = await prisma.message.findUnique({ where: { id } });
+    const { id } = await params;
+    const messageId = parseInt(id);
+    const message = await prisma.message.findUnique({ where: { id: messageId } });
 
     if (!message) {
       return NextResponse.json({ error: "Message not found" }, { status: 404 });
     }
 
-    await prisma.message.delete({ where: { id } });
+    await prisma.message.delete({ where: { id: messageId } });
 
     return NextResponse.json({ message: "Message deleted successfully" });
   } catch (error) {

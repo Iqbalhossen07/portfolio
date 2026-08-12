@@ -66,18 +66,18 @@ export default function MessagesList() {
                 
                 <div className="flex items-start gap-4 flex-1">
                   <div className="w-12 h-12 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-black text-lg shrink-0">
-                    {msg.userName.charAt(0).toUpperCase()}
+                    {msg.name?.charAt(0).toUpperCase()}
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                      {msg.userName}
+                      {msg.name}
                     </h3>
-                    <div className="flex items-center gap-4 text-xs text-slate-400 mt-1 mb-4 font-mono">
-                      <span className="flex items-center gap-1"><i className="fa-solid fa-envelope"></i> {msg.userEmail}</span>
-                      {msg.userPhone && <span className="flex items-center gap-1"><i className="fa-solid fa-phone"></i> {msg.userPhone}</span>}
+                    <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 mt-1 mb-4 font-mono">
+                      <span className="flex items-center gap-1"><i className="fa-solid fa-envelope"></i> {msg.email}</span>
+                      {msg.subject && <span className="flex items-center gap-1"><i className="fa-solid fa-tag"></i> {msg.subject}</span>}
                     </div>
                     <div className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
-                      {msg.userDescription}
+                      {msg.message}
                     </div>
                   </div>
                 </div>
