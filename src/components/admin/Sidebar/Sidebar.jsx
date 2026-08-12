@@ -55,7 +55,6 @@ export default function Sidebar({ isMobileOpen, setIsMobileOpen }) {
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <div>
             <img src="/logo.png" alt="Iqbal Hossen Logo" className="h-10 w-auto object-contain" />
-            <p className="text-xs text-slate-400 font-bold tracking-wider mt-2 uppercase">Admin Panel</p>
           </div>
           {/* Mobile Close Button */}
           <button 

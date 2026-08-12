@@ -194,18 +194,7 @@ const Projects = () => {
         </div>
 
         {/* See All Button */}
-        <div className="flex justify-center mt-16 md:mt-24">
-          <Link href="/projects"
-            className="group flex items-center gap-3 px-8 py-3.5 rounded-md font-black text-xs text-slate-500 border border-white/10 transition-all duration-300 hover:bg-white/5 hover:text-white hover:border-[#14b8a6]"
-          >
-            See All Projects
-            <div className="flex items-center -space-x-1">
-              <div className="w-1.5 h-1.5 rounded-none bg-[#14b8a6]"></div>
-              <div className="w-1.5 h-1.5 rounded-none bg-[#f97316]"></div>
-            </div>
-            <i className="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
-          </Link>
-        </div>
+      
         <div className="mt-16 text-center">
           <Link
             href="/projects"
