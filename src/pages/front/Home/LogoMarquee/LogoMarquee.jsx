@@ -94,7 +94,7 @@ const LogoMarquee = () => {
             <img 
               src={selectedPlatform.img} 
               alt={selectedPlatform.name} 
-              className="w-full h-auto max-h-[75vh] object-contain rounded-lg shadow-2xl"
+              className="w-full max-w-4xl h-auto max-h-[75vh] object-contain bg-white p-8 md:p-12 rounded-2xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
             {selectedPlatform.link && (
