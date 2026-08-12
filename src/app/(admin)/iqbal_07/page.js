@@ -15,7 +15,7 @@ export default function AdminDashboard() {
         <div className="relative z-10">
           <h2 className="text-3xl font-black text-white mb-2">Welcome back, Iqbal! 👋</h2>
           <p className="text-slate-400 max-w-xl text-sm leading-relaxed">
-            Here's what's happening with your portfolio today. You have 4 unread messages from potential clients.
+            Here's what's happening with your portfolio today. You have 4 unread messages from potential recruiters and contacts.
           </p>
           <div className="mt-6 flex gap-4">
             <Link href="/iqbal_07/messages" className="px-5 py-2.5 bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold text-sm rounded-md transition-colors">

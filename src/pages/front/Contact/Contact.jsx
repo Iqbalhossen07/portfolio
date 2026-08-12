@@ -71,9 +71,7 @@ const SocialLink = ({ s }) => {
 };
 
 const Contact = () => {
-  const [selectedBudget, setSelectedBudget] = useState("");
-
-  const budgets = ["< $100", "$100–$300", "$300–$600", "$600–$1000", "$1000+"];
+  const [subject, setSubject] = useState("");
 
   const avail = [
     {
@@ -138,7 +136,7 @@ const Contact = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // ফর্ম সাবমিটের এপিআই (API) কল এখানে বসবে
-    console.log("Form Submitted", { selectedBudget });
+    console.log("Form Submitted", { subject });
   };
 
   return (
@@ -316,28 +314,6 @@ const Contact = () => {
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-700">
                     <i className="fa-solid fa-chevron-down text-xs"></i>
                   </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-black uppercase tracking-wider text-slate-600">
-                  Budget Range
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {budgets.map((b, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setSelectedBudget(b)}
-                      className={`px-4 py-2 rounded-md text-xs font-black transition-all duration-200 border ${
-                        selectedBudget === b
-                          ? "border-teal-500/50 bg-teal-500/10 text-teal-400"
-                          : "border-white/5 bg-white/5 text-slate-500 hover:text-teal-400 hover:border-teal-500/30"
-                      }`}
-                    >
-                      {b}
-                    </button>
-                  ))}
                 </div>
               </div>
 

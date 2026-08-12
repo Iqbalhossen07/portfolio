@@ -97,7 +97,7 @@ const Hero = () => {
           <div className="mt-2 flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-none bg-green-400 animate-pulse inline-block"></span>
             <span className="text-[10px] font-semibold text-green-400">
-              Available for hire
+              Available for opportunities
             </span>
           </div>
         </div>

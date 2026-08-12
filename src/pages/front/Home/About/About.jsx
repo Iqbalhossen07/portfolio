@@ -208,7 +208,7 @@ const About = () => {
                   boxShadow: "0 4px 15px rgba(255,89,44,0.3)",
                 }}
               >
-                Hire Me
+                Let's Talk
               </Link>
             </div>
           </div>

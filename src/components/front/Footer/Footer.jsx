@@ -188,7 +188,7 @@ const Footer = () => {
               border: "1px solid rgba(255,255,255,0.1)",
             }}
           >
-            Hire Me
+            Contact Me
             <i className="fa-solid fa-arrow-right text-[10px]"></i>
           </Link>
         </div>
