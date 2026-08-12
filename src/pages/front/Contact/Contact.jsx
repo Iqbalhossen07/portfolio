@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import Breadcrumb from "../Contact/Breadcrumb/Breadcrumb";
@@ -73,6 +73,19 @@ const SocialLink = ({ s }) => {
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaConfig, setCaptchaConfig] = useState({ num1: 0, num2: 0 });
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    setCaptchaConfig({ num1, num2 });
+    setCaptchaAnswer("");
+  };
 
   const avail = [
     {
@@ -128,6 +141,20 @@ const Contact = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    if (parseInt(captchaAnswer) !== captchaConfig.num1 + captchaConfig.num2) {
+      Swal.fire({
+        title: "Bot Detected?",
+        text: "The math answer is incorrect. Please try again.",
+        icon: "error",
+        background: "#0a0a0f",
+        color: "#fff",
+        confirmButtonColor: "#f97316",
+      });
+      generateCaptcha();
+      return;
+    }
+
     setIsSubmitting(true);
 
     const formData = new FormData(e.target);
@@ -155,6 +182,7 @@ const Contact = () => {
           confirmButtonColor: "#14b8a6",
         });
         e.target.reset();
+        generateCaptcha();
       } else {
         const errorData = await res.json();
         Swal.fire({
@@ -329,6 +357,32 @@ const Contact = () => {
                     border: "1px solid rgba(255,255,255,0.06)",
                   }}
                 ></textarea>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-[11px] font-black uppercase tracking-wider text-slate-600">
+                  Are you human? <span className="text-orange-500">*</span>
+                </label>
+                <div className="relative group flex items-center gap-4">
+                  <div className="flex-1 flex items-center justify-center gap-3 bg-black/20 border border-white/10 rounded-md py-3.5 text-lg font-bold text-teal-400">
+                    <span>{captchaConfig.num1}</span>
+                    <span className="text-slate-500">+</span>
+                    <span>{captchaConfig.num2}</span>
+                    <span className="text-slate-500">=</span>
+                  </div>
+                  <input
+                    type="number"
+                    value={captchaAnswer}
+                    onChange={(e) => setCaptchaAnswer(e.target.value)}
+                    placeholder="?"
+                    required
+                    className="w-24 px-4 py-3.5 text-center rounded-md text-lg font-bold text-white placeholder-slate-700 outline-none transition-all duration-200"
+                    style={{
+                      background: "rgba(255,255,255,0.02)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                    }}
+                  />
+                </div>
               </div>
 
               <button
