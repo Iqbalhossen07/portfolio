@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 export default function ProjectsList() {
   const [projects, setProjects] = useState([]);
@@ -24,14 +25,41 @@ export default function ProjectsList() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this project?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this project deletion!",
+      icon: "warning",
+      background: "#1e293b",
+      color: "#fff",
+      showCancelButton: true,
+      confirmButtonColor: "#f43f5e",
+      cancelButtonColor: "#475569",
+      confirmButtonText: "Yes, delete it!"
+    });
+
+    if (!result.isConfirmed) return;
     
     try {
       const res = await fetch(`/api/projects/${id}`, { method: "DELETE" });
       if (res.ok) {
         setProjects(projects.filter(p => p.id !== id));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Project has been deleted.",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#14b8a6",
+        });
       } else {
-        alert("Failed to delete project");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete project.",
+          icon: "error",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#f43f5e",
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
