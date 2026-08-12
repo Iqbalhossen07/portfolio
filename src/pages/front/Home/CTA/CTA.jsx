@@ -88,7 +88,7 @@ const CTA = () => {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 px-6 sm:px-0">
               <Link href="/contact"
-                className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-md font-black text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2.5 px-8 py-3.5 font-black text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 w-full sm:w-auto justify-center"
                 style={{
                   background: "linear-gradient(135deg, #14b8a6, #0d9488)",
                   boxShadow: "0 8px 24px rgba(20, 184, 166, 0.3)",
@@ -101,7 +101,7 @@ const CTA = () => {
               </Link>
 
               <Link href="/projects"
-                className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-md font-black text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 w-full sm:w-auto justify-center"
+                className="inline-flex items-center gap-2.5 px-8 py-3.5  font-black text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 w-full sm:w-auto justify-center"
                 style={{
                   background: "rgba(255,255,255,0.03)",
                   border: "1px solid rgba(255,255,255,0.08)",

@@ -6,7 +6,6 @@ import LogoMarquee from "./LogoMarquee/LogoMarquee";
 import About from "./About/About";
 import Projects from "./Projects/Projects";
 import Services from "./Services/Services";
-import Process from "./Process/Process";
 import CTA from "./CTA/CTA";
 
 
@@ -18,7 +17,6 @@ const Home = () => {
       <About />
       <Projects />
       <Services />
-      <Process />
       <CTA />
     </div>
   );
