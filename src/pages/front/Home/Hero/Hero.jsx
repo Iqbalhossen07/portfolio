@@ -212,7 +212,7 @@ const Hero = () => {
           ease: "easeInOut",
           delay: 0.6,
         }}
-        className="hfc absolute z-20 pointer-events-none animate-[bounce_6s_ease-in-out_infinite_1.8s] hidden xl:block bottom-[12%] right-[12%]"
+        className="hfc absolute z-20 pointer-events-none animate-[bounce_6s_ease-in-out_infinite_1.8s] hidden xl:block bottom-[12%] right-[9%]"
       >
         <div className="">
           <div className="w-[190px] p-5 rounded-none backdrop-blur-2xl border border-white/10 bg-white/5 -rotate-3 shadow-2xl">

@@ -13,6 +13,9 @@ const merriweather = Merriweather({
 export const metadata = {
   title: "Iqbal's Portfolio",
   description: "Next.js migrated portfolio",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
