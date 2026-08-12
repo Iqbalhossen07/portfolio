@@ -73,7 +73,7 @@ const ProjectsPage = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {loading ? (
               <div className="text-center py-20">
                  <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -102,7 +102,7 @@ const ProjectsPage = () => {
                   }}
                 >
                   <div className="flex flex-col h-full">
-                    <div className="relative h-[250px] md:h-[300px] overflow-hidden">
+                    <div className="relative h-[200px] md:h-[220px] overflow-hidden">
                       <img
                         src={p.mainImageUrl}
                         alt={p.title}
@@ -122,10 +122,10 @@ const ProjectsPage = () => {
                       </div>
                     </div>
 
-                    <div className="p-6 md:p-8 flex flex-col flex-grow relative">
+                    <div className="p-5 md:p-6 flex flex-col flex-grow relative">
                       <div className="flex items-center gap-2 mb-6">
                         <span
-                          className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[10px] font-black"
+                          className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[9px] font-black"
                           style={{
                             background: "rgba(20, 184, 166, 0.1)",
                             border: "1px solid rgba(20, 184, 166, 0.2)",
@@ -136,18 +136,18 @@ const ProjectsPage = () => {
                           {p.liveLink ? "Live Project" : "Completed"}
                         </span>
                       </div>
-                      <h3 className="text-xl md:text-2xl font-black text-white mb-3 leading-tight">
+                      <h3 className="text-lg md:text-xl font-black text-white mb-2 leading-tight">
                         {p.title}
                       </h3>
-                      <p className="text-slate-400 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+                      <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 line-clamp-2">
                         {p.shortDescription}
                       </p>
 
-                      <div className="flex flex-wrap gap-2 mb-8">
+                      <div className="flex flex-wrap gap-2 mb-6">
                         {tags.map((tag, i) => (
                           <span
                             key={i}
-                            className="px-3 py-1.5 rounded-md text-[10px] font-bold border border-white/5 bg-white/5 text-slate-500"
+                            className="px-2 py-1 rounded-md text-[9px] font-bold border border-white/5 bg-white/5 text-slate-500"
                           >
                             {tag}
                           </span>
