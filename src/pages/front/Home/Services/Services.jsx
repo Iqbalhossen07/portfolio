@@ -13,8 +13,7 @@ const Services = () => {
       gfrom: "#3b82f6",
       gto: "#06b6d4",
       glow: "rgba(59,130,246,0.35)",
-      price: "Starting $299",
-      badge: "Most Popular",
+      badge: "Core Skill",
       badge_c: "#3b82f6",
       features: [
         "React / Next.js frontend",
@@ -32,7 +31,6 @@ const Services = () => {
       gfrom: "#7c3aed",
       gto: "#a855f7",
       glow: "rgba(124,58,237,0.35)",
-      price: "Starting $249",
       badge: null,
       features: [
         "Laravel / Node.js APIs",
@@ -50,8 +48,7 @@ const Services = () => {
       gfrom: "#10b981",
       gto: "#059669",
       glow: "rgba(16,185,129,0.35)",
-      price: "Starting $499",
-      badge: "Best Value",
+      badge: "Specialized",
       badge_c: "#10b981",
       features: [
         "Complete project ownership",
@@ -69,7 +66,6 @@ const Services = () => {
       gfrom: "#8b5cf6",
       gto: "#ec4899",
       glow: "rgba(139,92,246,0.35)",
-      price: "Starting $99",
       badge: null,
       features: [
         "Cinematic color grading",
@@ -87,7 +83,6 @@ const Services = () => {
       gfrom: "#ec4899",
       gto: "#f97316",
       glow: "rgba(236,72,153,0.35)",
-      price: "Starting $79",
       badge: null,
       features: [
         "Logo & brand identity",
@@ -148,11 +143,11 @@ const Services = () => {
           >
             <span className="w-1.5 h-1.5 rounded-none bg-pink-400 animate-pulse inline-block"></span>
             <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.22em] text-slate-400">
-              What I Offer
+              My Expertise
             </span>
           </div>
           <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4">
-            Services Built for{" "}
+            Skills Built for{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #14b8a6, #f97316)",
@@ -165,8 +160,8 @@ const Services = () => {
             </span>
           </h2>
           <p className="text-slate-400 text-sm md:text-lg max-w-2xl leading-relaxed px-2">
-            Every service I offer is designed with one goal in mind — to make
-            your digital presence stronger, faster, and more impactful.
+            Every skill I've honed is designed with one goal in mind — to build
+            digital products that are stronger, faster, and more impactful.
           </p>
         </div>
 
@@ -258,32 +253,6 @@ const Services = () => {
                   ))}
                 </div>
 
-                <div
-                  className="pt-5 flex items-center justify-between"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-                >
-                  <div>
-                    <div className="text-[9px] md:text-[10px] font-bold text-slate-600 uppercase tracking-wider mb-0.5">
-                      Investment
-                    </div>
-                    <div
-                      className="text-sm md:text-base font-black"
-                      style={{ color: sv.gfrom }}
-                    >
-                      {sv.price}
-                    </div>
-                  </div>
-                  <Link href="/contact"
-                    className="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-md font-black text-[10px] md:text-xs text-white transition-all duration-200 hover:scale-105 active:scale-95"
-                    style={{
-                      background: `linear-gradient(135deg, ${sv.gfrom}, ${sv.gto})`,
-                      border: "1px solid rgba(255,255,255,0.1)",
-                    }}
-                  >
-                    Order{" "}
-                    <i className="fa-solid fa-arrow-right text-[10px]"></i>
-                  </Link>
-                </div>
               </div>
             </div>
           ))}
@@ -321,11 +290,11 @@ const Services = () => {
               </div>
               <div>
                 <div className="text-lg font-black text-white mb-1">
-                  Need something custom?
+                  Ready to collaborate?
                 </div>
                 <p className="text-slate-400 text-sm">
-                  Every project is unique. Let's talk about exactly what you
-                  need — no packages, no limits.
+                  Whether you're building a new team or scaling an existing product,
+                  I'm ready to bring my expertise to the table.
                 </p>
               </div>
             </div>
