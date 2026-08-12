@@ -10,7 +10,7 @@ const Hero = () => {
     "Software Engineer",
     "MERN & Laravel Expert",
     "Next.js & Node Developer",
-    "Backend API Builder",
+    "Backend Developer",
     "Problem Solver",
   ];
   const [phraseIndex, setPhraseIndex] = useState(0);
