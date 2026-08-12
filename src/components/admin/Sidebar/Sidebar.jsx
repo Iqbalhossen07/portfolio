@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
-export default function Sidebar() {
+export default function Sidebar({ isMobileOpen, setIsMobileOpen }) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -38,13 +38,33 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 bg-[#0a0a0a] border-r border-white/10 h-screen sticky top-0 flex flex-col hidden md:flex">
-      <div className="p-6 border-b border-white/10">
-        <h2 className="text-2xl font-black text-white tracking-tight">
-          Iqbal<span className="text-teal-400">.</span>
-        </h2>
-        <p className="text-xs text-slate-400 font-bold tracking-wider mt-1 uppercase">Admin Panel</p>
-      </div>
+    <>
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 md:hidden"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
+      <aside 
+        className={`fixed md:static inset-y-0 left-0 w-[280px] md:w-64 bg-[#0a0a0a] border-r border-white/10 h-screen flex flex-col z-50 transition-transform duration-300 ease-in-out
+          ${isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}
+      >
+        <div className="p-6 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <img src="/logo.png" alt="Iqbal Hossen Logo" className="h-10 w-auto object-contain" />
+            <p className="text-xs text-slate-400 font-bold tracking-wider mt-2 uppercase">Admin Panel</p>
+          </div>
+          {/* Mobile Close Button */}
+          <button 
+            className="md:hidden text-slate-400 hover:text-white p-2"
+            onClick={() => setIsMobileOpen(false)}
+          >
+            <i className="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
 
       <nav className="flex-1 overflow-y-auto py-6 px-4 flex flex-col gap-2">
         {navItems.map((item, idx) => {
@@ -53,6 +73,7 @@ export default function Sidebar() {
             <Link
               key={idx}
               href={item.href}
+              onClick={() => setIsMobileOpen && setIsMobileOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-200 text-sm font-bold ${
                 isActive
                   ? "bg-teal-500/10 text-teal-400 border border-teal-500/20"
@@ -79,6 +100,7 @@ export default function Sidebar() {
           Logout
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
