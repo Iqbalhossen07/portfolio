@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function MessagesList() {
   const [messages, setMessages] = useState([]);
@@ -24,15 +25,42 @@ export default function MessagesList() {
   };
 
   const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this message?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      background: "#1e293b",
+      color: "#fff",
+      showCancelButton: true,
+      confirmButtonColor: "#f43f5e",
+      cancelButtonColor: "#475569",
+      confirmButtonText: "Yes, delete it!"
+    });
+
+    if (!result.isConfirmed) return;
     
     try {
       const res = await fetch(`/api/messages/${id}`, { method: "DELETE" });
       if (res.ok) {
         setMessages(messages.filter(m => m.id !== id));
         setSelectedIds(selectedIds.filter(selectedId => selectedId !== id));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Message has been deleted.",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#14b8a6",
+        });
       } else {
-        alert("Failed to delete message");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete message.",
+          icon: "error",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#f43f5e",
+        });
       }
     } catch (error) {
       console.error("Delete error:", error);
@@ -41,7 +69,20 @@ export default function MessagesList() {
 
   const handleBulkDelete = async () => {
     if (selectedIds.length === 0) return;
-    if (!confirm(`Are you sure you want to delete ${selectedIds.length} message(s)?`)) return;
+    
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `You are about to delete ${selectedIds.length} message(s).`,
+      icon: "warning",
+      background: "#1e293b",
+      color: "#fff",
+      showCancelButton: true,
+      confirmButtonColor: "#f43f5e",
+      cancelButtonColor: "#475569",
+      confirmButtonText: "Yes, delete them!"
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       const res = await fetch(`/api/messages/bulk-delete`, {
@@ -52,8 +93,23 @@ export default function MessagesList() {
       if (res.ok) {
         setMessages(messages.filter(m => !selectedIds.includes(m.id)));
         setSelectedIds([]);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Messages have been deleted.",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#14b8a6",
+        });
       } else {
-        alert("Failed to delete messages");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete messages.",
+          icon: "error",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#f43f5e",
+        });
       }
     } catch (error) {
       console.error("Bulk delete error:", error);
