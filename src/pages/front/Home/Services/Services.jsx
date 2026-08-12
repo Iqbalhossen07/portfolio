@@ -54,28 +54,10 @@ const Services = () => {
         "Complete project ownership",
         "Frontend + backend + DB",
         "CI/CD & deployment",
-        "30-day post-launch support",
+        "6 months post-launch support",
       ],
       featured: false,
-    },
-    {
-      icon: "fa-gear",
-      title: "Maintenance & Support",
-      tagline: "Always on. Always updated.",
-      desc: "Monthly retainers for ongoing support, performance monitoring, security patches, and feature additions — so you never have to worry.",
-      gfrom: "#f59e0b",
-      gto: "#f97316",
-      glow: "rgba(245,158,11,0.35)",
-      price: "From $79/mo",
-      badge: null,
-      features: [
-        "24/7 uptime monitoring",
-        "Security & CMS updates",
-        "Monthly performance report",
-        "Priority bug fixes",
-      ],
-      featured: false,
-    },
+    }
   ];
 
   return (
