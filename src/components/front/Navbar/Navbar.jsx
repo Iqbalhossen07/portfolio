@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -36,15 +38,18 @@ const Navbar = () => {
           </div>
 
           <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className="text-sm font-bold text-gray-400 hover:text-[#00BDCA] transition-colors duration-200"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.path || (link.path !== '/' && pathname.startsWith(link.path));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className={`text-sm font-bold transition-colors duration-200 ${isActive ? 'text-[#00BDCA]' : 'text-gray-400 hover:text-[#00BDCA]'}`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center justify-end gap-3 flex-shrink-0">
@@ -80,16 +85,19 @@ const Navbar = () => {
               exit={{ opacity: 0, y: -20 }}
               className="md:hidden absolute top-full left-4 right-4 mt-2 bg-[#0a0a0a] border border-white/10 rounded-md p-6 space-y-4 shadow-2xl pointer-events-auto"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-gray-300 py-2 border-b border-white/5 font-bold text-sm hover:text-[#00BDCA]"
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.path || (link.path !== '/' && pathname.startsWith(link.path));
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`block py-2 border-b border-white/5 font-bold text-sm ${isActive ? 'text-[#00BDCA]' : 'text-gray-300 hover:text-[#00BDCA]'}`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
             </motion.div>
           )}
         </AnimatePresence>
