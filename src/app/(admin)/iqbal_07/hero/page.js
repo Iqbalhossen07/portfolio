@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function HeroSettings() {
   const [formData, setFormData] = useState({ cvText: "Download CV", cvLink: "" });
@@ -46,10 +47,24 @@ export default function HeroSettings() {
         body: submitData,
       });
       if (res.ok) {
-        alert("CV settings saved successfully!");
+        Swal.fire({
+          title: "Saved!",
+          text: "CV settings updated successfully.",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#14b8a6",
+        });
         fetchHero(); // Refresh to get the new link
       } else {
-        alert("Failed to save CV settings.");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to save CV settings.",
+          icon: "error",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#f43f5e",
+        });
       }
     } catch (error) {
       console.error(error);
