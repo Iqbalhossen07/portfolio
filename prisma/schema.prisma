@@ -67,6 +67,7 @@ model Platform {
   name      String
   imageUrl  String
   imageId   String
+  link      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

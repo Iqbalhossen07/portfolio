@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 
 const LogoMarquee = () => {
   const [logos, setLogos] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedPlatform, setSelectedPlatform] = useState(null);
 
   useEffect(() => {
     const fetchPlatforms = async () => {
@@ -15,6 +15,7 @@ const LogoMarquee = () => {
           const mapped = data.map(p => ({
             name: p.name,
             img: p.imageUrl,
+            link: p.link,
           }));
           setLogos(mapped);
         }
@@ -51,20 +52,26 @@ const LogoMarquee = () => {
         </p>
       </div>
 
-      <div className="relative flex overflow-hidden">
+      <div className="relative flex overflow-hidden group/marquee">
         {/* ইনফিনিট অ্যানিমেশন কন্টেইনার */}
-        <div className="flex gap-4 md:gap-6 animate-logo-marquee whitespace-nowrap">
+        <div className="flex gap-4 md:gap-6 animate-logo-marquee whitespace-nowrap group-hover/marquee:[animation-play-state:paused]">
           {displayLogos.map((logo, index) => (
             <div
               key={index}
-              onClick={() => setSelectedImage(logo.img)}
-              className="logo-pill group flex-shrink-0 flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-md transition-all duration-300 border border-white/10 bg-white/5 hover:bg-[#14b8a6]/10 hover:border-[#14b8a6]/30 hover:-translate-y-1 overflow-hidden cursor-pointer"
+              onClick={() => setSelectedPlatform(logo)}
+              className="logo-pill group flex-shrink-0 flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-md transition-all duration-300 border border-white/10 bg-white/5 hover:bg-[#14b8a6]/10 hover:border-[#14b8a6]/30 hover:-translate-y-1 overflow-hidden cursor-pointer relative"
               style={{ background: "rgba(255, 255, 255, 0.03)", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}
             >
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                <div className="flex flex-col items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                  <i className="fa-solid fa-expand text-white text-xl"></i>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-white">Click to view</span>
+                </div>
+              </div>
               <img
                 src={logo.img}
                 alt={logo.name}
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-0"
                 loading="lazy"
               />
             </div>
@@ -73,24 +80,35 @@ const LogoMarquee = () => {
       </div>
 
       {/* LIGHTBOX MODAL */}
-      {selectedImage && (
+      {selectedPlatform && (
         <div 
           className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-10 bg-black/90 backdrop-blur-md transition-all duration-300"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedPlatform(null)}
         >
-          <div className="relative max-w-6xl w-full max-h-full flex items-center justify-center">
+          <div className="relative max-w-6xl w-full max-h-full flex items-center justify-center flex-col gap-6">
             <button 
-              onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+              onClick={(e) => { e.stopPropagation(); setSelectedPlatform(null); }}
               className="absolute -top-12 right-0 md:-right-12 text-white/50 hover:text-white transition-colors text-4xl font-black focus:outline-none"
             >
               &times;
             </button>
             <img 
-              src={selectedImage} 
-              alt="Enlarged Logo" 
-              className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              src={selectedPlatform.img} 
+              alt={selectedPlatform.name} 
+              className="w-full h-auto max-h-[75vh] object-contain rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
+            {selectedPlatform.link && (
+              <a 
+                href={selectedPlatform.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 bg-teal-500 hover:bg-teal-400 text-white font-bold text-sm uppercase tracking-wider rounded-full transition-all shadow-lg hover:shadow-teal-500/25 flex items-center gap-3"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Live Link <i className="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            )}
           </div>
         </div>
       )}

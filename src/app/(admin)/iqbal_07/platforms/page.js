@@ -10,9 +10,11 @@ export default function ManagePlatforms() {
   
   // Form state
   const [name, setName] = useState("");
+  const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     fetchPlatforms();
@@ -40,7 +42,7 @@ export default function ManagePlatforms() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !image) {
+    if (!name || (!image && !editingId)) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -54,19 +56,20 @@ export default function ManagePlatforms() {
     setIsSubmitting(true);
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("image", image);
+    if (link) formData.append("link", link);
+    if (image) formData.append("image", image);
 
     try {
-      const res = await fetch("/api/platforms", {
-        method: "POST",
+      const res = await fetch(editingId ? `/api/platforms/${editingId}` : "/api/platforms", {
+        method: editingId ? "PUT" : "POST",
         body: formData,
       });
 
       if (res.ok) {
         Swal.fire({
           icon: "success",
-          title: "Added!",
-          text: "Company added successfully.",
+          title: editingId ? "Updated!" : "Added!",
+          text: `Company ${editingId ? "updated" : "added"} successfully.`,
           confirmButtonColor: "#14b8a6",
           background: "#0f172a",
           color: "#fff"
@@ -74,7 +77,7 @@ export default function ManagePlatforms() {
         closeModal();
         fetchPlatforms();
       } else {
-        throw new Error("Failed to add company");
+        throw new Error("Failed to save company");
       }
     } catch (error) {
       Swal.fire({
@@ -135,9 +138,20 @@ export default function ManagePlatforms() {
     }
   };
 
+  const openEditModal = (platform) => {
+    setEditingId(platform.id);
+    setName(platform.name);
+    setLink(platform.link || "");
+    setPreviewUrl(platform.imageUrl);
+    setImage(null);
+    setIsModalOpen(true);
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
+    setEditingId(null);
     setName("");
+    setLink("");
     setImage(null);
     setPreviewUrl("");
   };
@@ -171,6 +185,12 @@ export default function ManagePlatforms() {
             
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1 z-20">
               <button 
+                onClick={(e) => { e.stopPropagation(); openEditModal(p); }}
+                className="w-7 h-7 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors border border-blue-500/20 shadow-lg"
+              >
+                <i className="fa-solid fa-pen text-[10px]"></i>
+              </button>
+              <button 
                 onClick={(e) => { e.stopPropagation(); handleDelete(p.id); }}
                 className="w-7 h-7 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors border border-red-500/20 shadow-lg"
               >
@@ -187,7 +207,7 @@ export default function ManagePlatforms() {
             <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
             <div className="p-6 md:p-8 relative z-10">
               <div className="flex items-center justify-between mb-8">
-                <h3 className="text-2xl font-black text-white">Add New Company</h3>
+                <h3 className="text-2xl font-black text-white">{editingId ? "Edit Company" : "Add New Company"}</h3>
                 <button onClick={closeModal} className="text-slate-400 hover:text-white transition-colors">
                   <i className="fa-solid fa-xmark text-xl"></i>
                 </button>
@@ -206,7 +226,18 @@ export default function ManagePlatforms() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Upload Logo</label>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Company Link (Optional)</label>
+                  <input 
+                    type="url" 
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
+                    placeholder="https://example.com"
+                    className="w-full bg-[#1e293b] border border-white/10 text-white rounded-xl px-4 py-3 focus:outline-none focus:border-teal-400 transition-colors font-semibold placeholder:text-slate-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Upload Logo {editingId && "(Leave empty to keep current)"}</label>
                   <div className="border-2 border-dashed border-white/10 rounded-xl p-8 flex flex-col items-center justify-center relative hover:border-teal-400/50 transition-colors bg-[#1e293b]/50">
                     <input 
                       type="file" 
@@ -234,7 +265,7 @@ export default function ManagePlatforms() {
                     disabled={isSubmitting}
                     className="px-6 py-3 bg-teal-500 hover:bg-teal-400 text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors shadow-lg disabled:opacity-50"
                   >
-                    {isSubmitting ? "Uploading..." : "Upload Now"}
+                    {isSubmitting ? "Saving..." : "Save Now"}
                   </button>
                 </div>
               </form>

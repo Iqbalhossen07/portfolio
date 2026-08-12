@@ -21,6 +21,7 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     const name = formData.get("name") || "Untitled Platform";
+    const link = formData.get("link") || null;
     const imageFile = formData.get("image");
 
     if (!imageFile || typeof imageFile === "string") {
@@ -33,6 +34,7 @@ export async function POST(request) {
     const newPlatform = await prisma.platform.create({
       data: {
         name,
+        link,
         imageUrl: upload.secure_url,
         imageId: upload.public_id,
       },
