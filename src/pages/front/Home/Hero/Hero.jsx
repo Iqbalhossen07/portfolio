@@ -140,6 +140,28 @@ const Hero = () => {
                 Node.js
               </span>
             </div>
+            
+            <div className="flex flex-col items-center gap-1">
+              <div className="w-8 h-8 rounded-none bg-white/10 border border-white/20 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="#ffffff">
+                  <path d="M18.666 5.333H5.334v13.334h13.332V5.333zM16.592 16h-1.424l-3.957-5.918v5.918H10.15V8h1.423l3.957 5.917V8h1.062v8z" />
+                </svg>
+              </div>
+              <span className="text-[8px] font-black text-white">
+                Next.js
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-1">
+              <div className="w-8 h-8 rounded-none bg-red-500/15 border border-red-500/30 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="#FF2D20">
+                  <path d="M22.617 7.027l-9.988-5.32c-.382-.207-.867-.207-1.25 0L1.383 7.027A1.218 1.218 0 00.75 8.082v7.836c0 .445.244.85.633 1.055l9.996 5.319a1.267 1.267 0 001.242 0l9.996-5.319a1.219 1.219 0 00.633-1.055V8.082c0-.445-.244-.85-.633-1.055zm-11.45-3.385c.195-.11.433-.11.629 0l8.035 4.281-8.35 4.542-8.35-4.542 8.036-4.281zm-9.155 5.5l7.918 4.305v9.117L2.012 18.26V9.142zm19.976 9.118l-7.918 4.304v-9.117l7.918-4.305v9.118z" />
+                </svg>
+              </div>
+              <span className="text-[8px] font-black text-red-400">
+                Laravel
+              </span>
+            </div>
           </div>
         </div>
       </motion.div>
