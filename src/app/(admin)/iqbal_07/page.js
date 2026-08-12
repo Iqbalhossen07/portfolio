@@ -1,10 +1,17 @@
 import React from "react";
 import Link from "next/link";
+import prisma from "@/lib/prisma";
 
-export default function AdminDashboard() {
+export default async function AdminDashboard() {
+  const totalProjects = await prisma.project.count();
+  const unreadMessagesCount = await prisma.message.count({
+    where: { isRead: false },
+  });
+  const totalMessages = await prisma.message.count();
+
   const stats = [
-    { label: "Total Projects", value: "12", icon: "fa-briefcase", color: "text-teal-400", bg: "bg-teal-400/10" },
-    { label: "Messages", value: "4", icon: "fa-envelope", color: "text-orange-400", bg: "bg-orange-400/10" },
+    { label: "Total Projects", value: totalProjects.toString(), icon: "fa-briefcase", color: "text-teal-400", bg: "bg-teal-400/10" },
+    { label: "Messages", value: totalMessages.toString(), icon: "fa-envelope", color: "text-orange-400", bg: "bg-orange-400/10" },
   ];
 
   return (
@@ -15,7 +22,7 @@ export default function AdminDashboard() {
         <div className="relative z-10">
           <h2 className="text-3xl font-black text-white mb-2">Welcome back, Iqbal! 👋</h2>
           <p className="text-slate-400 max-w-xl text-sm leading-relaxed">
-            Here's what's happening with your portfolio today. You have 4 unread messages from potential recruiters and contacts.
+            Here's what's happening with your portfolio today. You have {unreadMessagesCount} unread message{unreadMessagesCount !== 1 ? 's' : ''} from potential recruiters and contacts.
           </p>
           <div className="mt-6 flex gap-4">
             <Link href="/iqbal_07/messages" className="px-5 py-2.5 bg-teal-500 hover:bg-teal-400 text-teal-950 font-bold text-sm rounded-md transition-colors">
