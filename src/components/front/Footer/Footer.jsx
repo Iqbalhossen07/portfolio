@@ -11,9 +11,7 @@ const Footer = () => {
   const socials = [
     { icon: "fa-github", href: "https://github.com/Iqbalhossen07", label: "GitHub", c: "#ffffff" },
     { icon: "fa-linkedin", href: "https://www.linkedin.com/in/md-iqbal-hossen-cse/", label: "LinkedIn", c: "#14b8a6" },
-    { icon: "fa-twitter", href: "https://twitter.com", label: "Twitter", c: "#f97316" },
     { icon: "fa-facebook", href: "https://www.facebook.com/iqbalhossen03", label: "Facebook", c: "#14b8a6" },
-    { icon: "fa-youtube", href: "https://youtube.com", label: "YouTube", c: "#f97316" },
   ];
 
   // Quick Links Data
