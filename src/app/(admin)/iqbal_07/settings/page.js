@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function UserSettings() {
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "", avatar: "" });
@@ -52,13 +53,35 @@ export default function UserSettings() {
         body: data,
       });
       if (res.ok) {
-        alert("Settings saved successfully!");
+        Swal.fire({
+          title: "Settings Saved!",
+          text: "Your profile has been updated successfully.",
+          icon: "success",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#14b8a6",
+        });
         setFormData(prev => ({ ...prev, password: "" })); // Clear password field after save
       } else {
-        alert("Failed to save settings.");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to save settings.",
+          icon: "error",
+          background: "#1e293b",
+          color: "#fff",
+          confirmButtonColor: "#ef4444",
+        });
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        title: "Error!",
+        text: "An unexpected error occurred.",
+        icon: "error",
+        background: "#1e293b",
+        color: "#fff",
+        confirmButtonColor: "#ef4444",
+      });
     } finally {
       setIsSaving(false);
     }
