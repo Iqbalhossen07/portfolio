@@ -153,7 +153,7 @@ const Hero = () => {
           ease: "easeInOut",
           delay: 0.6,
         }}
-        className="hfc absolute z-20 pointer-events-none hidden xl:block top-[28%] right-[10%]"
+        className="hfc absolute z-20 pointer-events-none hidden xl:block top-[20%] right-[8%]"
       >
         <div className="hfc-card w-[205px] p-4 rounded-md backdrop-blur-xl rotate-[4deg]">
           <div className="flex items-center justify-between mb-3">
@@ -190,7 +190,7 @@ const Hero = () => {
           ease: "easeInOut",
           delay: 0.6,
         }}
-        className="hfc absolute z-20 pointer-events-none animate-[bounce_6s_ease-in-out_infinite_1.8s] hidden xl:block bottom-[18%] right-[10%]"
+        className="hfc absolute z-20 pointer-events-none animate-[bounce_6s_ease-in-out_infinite_1.8s] hidden xl:block bottom-[12%] right-[12%]"
       >
         <div className="">
           <div className="w-[190px] p-5 rounded-none backdrop-blur-2xl border border-white/10 bg-white/5 -rotate-3 shadow-2xl">
