@@ -19,7 +19,7 @@ const Navbar = () => {
     <header className="fixed top-4 left-0 right-0 z-50 pointer-events-none">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div
-          className="pointer-events-auto  rounded-md px-6 md:px-10 py-3 flex items-center justify-between relative"
+          className="pointer-events-auto bg-[#0a0a0a]/80 backdrop-blur-md rounded-md px-6 md:px-10 py-3 flex items-center justify-between relative"
           style={{
             border: "1px solid rgba(255,255,255,0.13)",
             boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
