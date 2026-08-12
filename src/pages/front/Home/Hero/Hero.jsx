@@ -8,9 +8,9 @@ const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const phrases = [
     "Software Engineer",
-    "React & Laravel Expert",
-    "API Builder",
-    "UI/UX Enthusiast",
+    "MERN & Laravel Expert",
+    "Next.js & Node Developer",
+    "Backend API Builder",
     "Problem Solver",
   ];
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -218,7 +218,8 @@ const Hero = () => {
         </div>
 
         <h1 className="text-xl md:text-4xl font-black leading-[1.1] tracking-tight mb-8 max-w-4xl mx-auto text-white">
-          <span>Hi, I'm Iqbal — </span>
+          <span>Hi, I'm Iqbal —</span>
+          <br className="hidden md:block" />
           <span
             style={{
               display: "inline",
