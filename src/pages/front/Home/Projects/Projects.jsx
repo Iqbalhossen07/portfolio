@@ -71,20 +71,20 @@ const Projects = () => {
         </div>
 
         {/* Projects List */}
-        <div className="flex flex-col gap-6 md:gap-10">
-          {projects.map((p, pi) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+          {projects.slice(0, 3).map((p, pi) => (
             <div
               key={pi}
-              className="group relative rounded-md overflow-hidden transition-all duration-500 hover:scale-[1.005]"
+              className={`group relative rounded-md overflow-hidden transition-all duration-500 hover:scale-[1.005] ${pi === 0 ? "lg:col-span-2" : "col-span-1"}`}
               style={{
                 background: "rgba(255,255,255,0.02)",
                 border: "1px solid rgba(255,255,255,0.06)",
                 boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
               }}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
+              <div className={`grid grid-cols-1 ${pi === 0 ? "lg:grid-cols-2" : "lg:grid-cols-1"} items-center`}>
                 {/* Project Image */}
-                <div className="relative h-[250px] md:h-[350px] lg:h-[480px] overflow-hidden">
+                <div className={`relative overflow-hidden ${pi === 0 ? "h-[250px] md:h-[350px] lg:h-[480px]" : "h-[250px] md:h-[300px]"}`}>
                   <img
                     src={p.mainImageUrl || "https://images.unsplash.com/photo-1573496130407-57329f01f769?q=80&w=1169"}
                     alt={p.title}
@@ -203,6 +203,15 @@ const Projects = () => {
               <div className="w-1.5 h-1.5 rounded-none bg-[#f97316]"></div>
             </div>
             <i className="fa-solid fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
+          </Link>
+        </div>
+        <div className="mt-16 text-center">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border border-white/10 hover:border-teal-400 hover:bg-teal-400/10 text-white font-bold text-sm uppercase tracking-wider rounded-md transition-all duration-300 group"
+          >
+            View All Projects
+            <i className="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
           </Link>
         </div>
       </div>
