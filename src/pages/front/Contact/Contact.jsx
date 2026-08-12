@@ -194,13 +194,12 @@ const Contact = () => {
                     Send a Message
                   </div>
                   <h2 className="text-xl font-black text-white leading-tight">
-                    Let's talk about your project
+                    Let's get in touch
                   </h2>
                 </div>
               </div>
               <p className="text-slate-500 text-sm leading-relaxed">
-                Fill in the form below and I'll get back to you within 30
-                Minutes.
+                Fill out the form below or email me directly. I'll get back to you as soon as possible.
               </p>
             </div>
 
@@ -262,7 +261,7 @@ const Contact = () => {
                   <input
                     type="text"
                     name="subject"
-                    placeholder="Project inquiry / Collaboration..."
+                    placeholder="Opportunity / Collaboration..."
                     required
                     className="w-full pl-10 pr-4 py-3.5 rounded-md text-sm font-semibold text-white placeholder-slate-700 outline-none transition-all duration-200"
                     style={{
@@ -275,56 +274,12 @@ const Contact = () => {
 
               <div className="flex flex-col gap-2">
                 <label className="text-[11px] font-black uppercase tracking-wider text-slate-600">
-                  Service Needed
-                </label>
-                <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none transition-colors group-focus-within:text-teal-400">
-                    <i className="fa-solid fa-gear text-slate-700 text-xs"></i>
-                  </div>
-                  <select
-                    name="service"
-                    className="w-full pl-10 pr-4 py-3.5 rounded-md text-sm font-semibold text-slate-400 outline-none appearance-none transition-all duration-200 cursor-pointer"
-                    style={{
-                      background: "rgba(255,255,255,0.02)",
-                      border: "1px solid rgba(255,255,255,0.06)",
-                    }}
-                  >
-                    <option value="" style={{ background: "#0a0a0f" }}>
-                      Select a service...
-                    </option>
-                    <option value="web-dev" style={{ background: "#0a0a0f" }}>
-                      Web Development
-                    </option>
-                    <option value="backend" style={{ background: "#0a0a0f" }}>
-                      Backend & API Dev
-                    </option>
-                    <option value="fullstack" style={{ background: "#0a0a0f" }}>
-                      Full Stack Project
-                    </option>
-                    <option value="video" style={{ background: "#0a0a0f" }}>
-                      Video Editing
-                    </option>
-                    <option value="design" style={{ background: "#0a0a0f" }}>
-                      Graphic Design
-                    </option>
-                    <option value="other" style={{ background: "#0a0a0f" }}>
-                      Other / Not Sure
-                    </option>
-                  </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-700">
-                    <i className="fa-solid fa-chevron-down text-xs"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <label className="text-[11px] font-black uppercase tracking-wider text-slate-600">
                   Your Message <span className="text-orange-500">*</span>
                 </label>
                 <textarea
                   name="message"
                   rows="5"
-                  placeholder="Tell me about your project..."
+                  placeholder="Write your message here..."
                   required
                   className="w-full px-4 py-3.5 rounded-md text-sm font-semibold text-white placeholder-slate-700 outline-none transition-all duration-200 resize-none"
                   style={{
