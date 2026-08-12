@@ -7,6 +7,7 @@ export default function UserSettings() {
   const [avatarFile, setAvatarFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     fetchSettings();
@@ -133,7 +134,23 @@ export default function UserSettings() {
           <h3 className="text-sm font-bold text-white mb-4">Security</h3>
           <div>
             <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">New Password (leave blank to keep current)</label>
-            <input type="password" name="password" value={formData.password} onChange={handleInputChange} className="w-full max-w-md bg-black/20 border border-white/10 rounded-md px-4 py-2.5 text-white focus:outline-none focus:border-teal-500" placeholder="••••••••" />
+            <div className="relative w-full max-w-md">
+              <input 
+                type={showPassword ? "text" : "password"} 
+                name="password" 
+                value={formData.password} 
+                onChange={handleInputChange} 
+                className="w-full bg-black/20 border border-white/10 rounded-md pl-4 pr-10 py-2.5 text-white focus:outline-none focus:border-teal-500" 
+                placeholder="••••••••" 
+              />
+              <button 
+                type="button" 
+                onClick={() => setShowPassword(!showPassword)} 
+                className="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-white transition-colors focus:outline-none"
+              >
+                <i className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+              </button>
+            </div>
           </div>
         </div>
 
