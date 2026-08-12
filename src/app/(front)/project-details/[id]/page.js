@@ -1,1 +1,1 @@
-export { default } from "../../../../pages/front/ProjectDetails/ProjectDetails";
+export { default } from "../../../../views/front/ProjectDetails/ProjectDetails";
