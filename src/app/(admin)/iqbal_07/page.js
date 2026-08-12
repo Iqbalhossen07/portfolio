@@ -11,7 +11,7 @@ export default async function AdminDashboard() {
 
   // Fetch admin user for dynamic welcome text
   const adminUser = await prisma.user.findFirst();
-  const firstName = adminUser?.fullName ? adminUser.fullName.split(" ")[0] : "Admin";
+  const welcomeName = adminUser?.fullName || "Admin";
 
   const stats = [
     { label: "Total Projects", value: totalProjects.toString(), icon: "fa-briefcase", color: "text-teal-400", bg: "bg-teal-400/10" },
@@ -24,7 +24,7 @@ export default async function AdminDashboard() {
       <div className="p-8 rounded-xl bg-gradient-to-br from-teal-900/40 to-slate-900/40 border border-teal-500/20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="relative z-10">
-          <h2 className="text-3xl font-black text-white mb-2">Welcome back, {firstName}! 👋</h2>
+          <h2 className="text-3xl font-black text-white mb-2">Welcome back, {welcomeName}! 👋</h2>
           <p className="text-slate-400 max-w-xl text-sm leading-relaxed">
             Here's what's happening with your portfolio today. You have {unreadMessagesCount} unread message{unreadMessagesCount !== 1 ? 's' : ''} from potential recruiters and contacts.
           </p>
