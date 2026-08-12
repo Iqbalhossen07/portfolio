@@ -31,7 +31,7 @@ export default function LoginPage() {
         setError(data.message || "Failed to log in.");
         setLoading(false);
       } else {
-        router.push("/iqbal_07/messages");
+        router.push("/iqbal_07");
         router.refresh(); // Refresh to update middleware state
       }
     } catch (err) {
