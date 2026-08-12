@@ -146,7 +146,7 @@ const About = () => {
                   SetsTech
                 </h4>
                 <p className="text-[10px] md:text-sm text-slate-500 font-medium">
-                  Full Stack Dev
+                  Software Engineer
                 </p>
               </div>
 
