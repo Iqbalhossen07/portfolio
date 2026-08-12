@@ -21,7 +21,7 @@ const Footer = () => {
     { label: "Home", href: "/", icon: "fa-house" },
     { label: "About", href: "#about", icon: "fa-user" },
     { label: "Projects", href: "/projects", icon: "fa-layer-group" },
-    { label: "Services", href: "#services", icon: "fa-gear" },
+    { label: "Expertise", href: "#services", icon: "fa-gear" },
     { label: "Skills", href: "#skills", icon: "fa-code" },
     { label: "Contact", href: "/contact", icon: "fa-envelope" },
   ];
@@ -30,10 +30,7 @@ const Footer = () => {
   const servs = [
     "Web Development",
     "Backend & APIs",
-    "Full Stack Apps",
-    "Video Editing",
-    "Graphic Design",
-    "Maintenance",
+    "Full Stack Projects",
   ];
 
   return (
@@ -133,10 +130,10 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Services List */}
+          {/* Expertise List */}
           <div className="flex flex-col gap-4">
             <h4 className="text-xs font-black uppercase tracking-[0.2em] text-slate-600">
-              Services
+              Expertise
             </h4>
             <div className="flex flex-col gap-3">
               {servs.map((sv, index) => (
