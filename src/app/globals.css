@@ -35,7 +35,7 @@ body {
 }
 
 .animate-logo-marquee {
-  animation: logo-marquee 20s linear infinite;
+  animation: logo-marquee 120s linear infinite;
   display: flex;
   width: max-content;
 }

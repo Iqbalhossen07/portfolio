@@ -177,11 +177,11 @@ export default function ManagePlatforms() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {platforms.map((p) => (
-          <div key={p.id} className="bg-slate-900/40 border border-white/10 rounded-md flex flex-col items-center justify-center relative group hover:border-white/20 transition-all duration-300 h-48 overflow-hidden cursor-pointer" onClick={() => setSelectedImage(p.imageUrl)}>
+          <div key={p.id} className="bg-white rounded-md flex flex-col items-center justify-center relative group shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300 h-48 overflow-hidden cursor-pointer" onClick={() => openEditModal(p)}>
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none flex items-center justify-center">
-              <i className="fa-solid fa-expand text-white text-3xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"></i>
+              <i className="fa-solid fa-pen text-white text-3xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300"></i>
             </div>
-            <img src={p.imageUrl} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            <img src={p.imageUrl} alt={p.name} className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-110" />
             
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1 z-20">
               <button 

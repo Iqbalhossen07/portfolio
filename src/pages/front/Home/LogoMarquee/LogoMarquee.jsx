@@ -28,7 +28,7 @@ const LogoMarquee = () => {
 
   // Seamless লুপের জন্য ডুপ্লিকেট অ্যারে
   // যদি লোগো খুব কম থাকে তাহলে স্ক্রিন ভরানোর জন্য বেশি বার ডুপ্লিকেট করতে হবে
-  const displayLogos = Array.from({ length: 15 }).flatMap(() => logos);
+  const displayLogos = Array.from({ length: 6 }).flatMap(() => logos);
 
   if (logos.length === 0) return null;
 
@@ -59,8 +59,7 @@ const LogoMarquee = () => {
             <div
               key={index}
               onClick={() => setSelectedPlatform(logo)}
-              className="logo-pill group flex-shrink-0 flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-md transition-all duration-300 border border-white/10 bg-white/5 hover:bg-[#14b8a6]/10 hover:border-[#14b8a6]/30 hover:-translate-y-1 overflow-hidden cursor-pointer relative"
-              style={{ background: "rgba(255, 255, 255, 0.03)", boxShadow: "0 4px 20px rgba(0,0,0,0.2)" }}
+              className="logo-pill group flex-shrink-0 flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-md transition-all duration-300 border border-white/10 bg-white hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:-translate-y-1 overflow-hidden cursor-pointer relative"
             >
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
@@ -71,7 +70,7 @@ const LogoMarquee = () => {
               <img
                 src={logo.img}
                 alt={logo.name}
-                className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 relative z-0"
+                className="w-full h-full object-contain p-4 group-hover:scale-110 transition-all duration-500 relative z-0"
                 loading="lazy"
               />
             </div>
