@@ -143,37 +143,37 @@ const AboutPage = () => {
                 </h2>
               </div>
 
-              <div class="space-y-5">
-                <p class="text-slate-400 text-lg leading-relaxed">
+              <div className="space-y-5">
+                <p className="text-slate-400 text-lg leading-relaxed">
                   As a child, every time I visited Google or other websites, a
                   burning question lived in my mind:{" "}
-                  <span class="text-white font-semibold">
+                  <span className="text-white font-semibold">
                     "Who builds these, and how?"
                   </span>{" "}
                   That innocent curiosity turned into a deep-rooted ambition to
                   become a creator of the web myself.
                 </p>
-                <p class="text-slate-400 text-lg leading-relaxed">
+                <p className="text-slate-400 text-lg leading-relaxed">
                   To turn this dream into reality, I pursued a degree in{" "}
-                  <span class="text-white font-semibold">
+                  <span className="text-white font-semibold">
                     Computer Science & Engineering (CSE)
                   </span>
                   . This academic foundation allowed me to grasp everything from
                   core theoretical concepts to practical implementation. I
                   complemented my formal education with relentless self-learning
                   through platforms like{" "}
-                  <span class="text-teal-400 font-bold">YouTube</span> and{" "}
-                  <span class="text-orange-400 font-bold">W3Schools</span>.
+                  <span className="text-teal-400 font-bold">YouTube</span> and{" "}
+                  <span className="text-orange-400 font-bold">W3Schools</span>.
                 </p>
-                <p class="text-slate-400 text-lg leading-relaxed">
+                <p className="text-slate-400 text-lg leading-relaxed">
                   My professional journey truly accelerated under the mentorship
                   of a senior expert who guided me into the industry. Today,
                   with over{" "}
-                  <span class="text-white font-semibold">
+                  <span className="text-white font-semibold">
                     2+ years of professional experience
                   </span>
                   , I have successfully delivered{" "}
-                  <span class="text-teal-400 font-bold">
+                  <span className="text-teal-400 font-bold">
                     18+ high-end projects in the UK market
                   </span>
                   , mastering both the MERN stack and PHP.
