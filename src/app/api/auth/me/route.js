@@ -18,7 +18,7 @@ export async function GET(req) {
 
     // Fetch fresh user data from DB to ensure avatar and name are up-to-date
     const dbUser = await prisma.user.findUnique({
-      where: { id: Number(payload.id) },
+      where: { id: Number(payload.userId) },
       select: { id: true, email: true, fullName: true, avatar: true }
     });
 
