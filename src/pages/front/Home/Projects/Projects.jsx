@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { getIconClass } from "@/lib/iconUtils";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -133,7 +134,7 @@ const Projects = () => {
                         key={i}
                         className="px-3 py-1.5 rounded-md text-[10px] font-bold border border-white/5 bg-white/5 text-slate-500"
                       >
-                        {tag.icon && <i className={`${tag.icon} mr-1`}></i>}
+                        {tag.icon && <i className={`${getIconClass(tag.icon)} mr-1`}></i>}
                         {tag.name || tag}
                       </span>
                     ))}

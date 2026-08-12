@@ -127,7 +127,7 @@ const AboutPage = () => {
                     My Narrative
                   </span>
                 </div>
-                <h2 className="text-3xl md:text-5xl font-black text-white leading-[1.1] tracking-tight mb-6">
+                <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-6">
                   From Childhood Curiosity to
                   <br />
                   <span
@@ -269,7 +269,7 @@ const AboutPage = () => {
                 Experience
               </span>
             </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white leading-[1.1] tracking-tight">
+            <h2 className="text-xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white leading-[1.1] tracking-tight">
               Where I've{" "}
               <span
                 style={{
@@ -374,7 +374,7 @@ const AboutPage = () => {
                 Education
               </span>
             </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white leading-[1.1] tracking-tight">
+            <h2 className="text-xl md:text-4xl lg:text-4xl xl:text-4xl 2xl:text-4xl font-black text-white leading-[1.1] tracking-tight">
               My{" "}
               <span
                 style={{
@@ -477,7 +477,7 @@ const AboutPage = () => {
               </p>
               <div className="flex flex-row items-center justify-center gap-2 md:gap-3 w-full px-2">
                 <Link href="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 rounded-md font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5  font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
                   style={{
                     background: "linear-gradient(135deg, #14b8a6, #0d9488)",
                     boxShadow: "0 6px 20px rgba(20, 184, 166, 0.3)",
@@ -488,7 +488,7 @@ const AboutPage = () => {
                   Get in Touch
                 </Link>
                 <Link href="/projects"
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 rounded-md font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 md:px-7 md:py-3.5 font-black text-[11px] md:text-sm text-white transition-all duration-200 hover:scale-105 active:scale-95 flex-1 sm:flex-none"
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: "1px solid rgba(255,255,255,0.08)",
