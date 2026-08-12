@@ -54,7 +54,7 @@ const Services = () => {
         "Complete project ownership",
         "Frontend + backend + DB",
         "CI/CD & deployment",
-        "6 months post-launch support",
+        "Ongoing post-launch support",
       ],
       featured: false,
     }
