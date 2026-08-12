@@ -76,7 +76,7 @@ const Contact = () => {
   const avail = [
     {
       label: "Response Time",
-      val: "Within 24 hours",
+      val: "30 Minutes",
       icon: "fa-bolt",
       c: "#14b8a6",
     },
@@ -334,7 +334,7 @@ const Contact = () => {
                     Currently Available
                   </div>
                   <div className="text-[11px] text-slate-500 mt-0.5 uppercase tracking-wider">
-                    Taking on new projects
+                    Open for new opportunities
                   </div>
                 </div>
                 <span className="ml-auto w-2.5 h-2.5 rounded-none bg-teal-400 animate-pulse flex-shrink-0"></span>

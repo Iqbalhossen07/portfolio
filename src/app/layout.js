@@ -1,5 +1,6 @@
 import { Merriweather } from "next/font/google";
 import "./globals.css";
+import WhatsAppSticky from "@/components/common/WhatsAppSticky";
 
 
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col relative bg-[#050505] overflow-x-hidden text-white" suppressHydrationWarning>
         {children}
+        <WhatsAppSticky />
       </body>
     </html>
   );
