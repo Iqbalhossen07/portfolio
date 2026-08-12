@@ -62,7 +62,7 @@ const About = () => {
             >
               <img
                 src={image.src || image}
-                alt="Iqbal — Full Stack Developer"
+                alt="Iqbal — Software Engineer"
                 className="w-full h-112.5 object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent"></div>
@@ -71,7 +71,7 @@ const About = () => {
                   Md Iqbal Hossen
                 </h3>
                 <p className="text-sm font-bold text-[#00BDCA]">
-                  Full Stack Web Developer
+                  Software Engineer
                 </p>
               </div>
             </div>
@@ -118,7 +118,7 @@ const About = () => {
               </h2>
               <p className="text-slate-400 text-sm md:text-lg leading-relaxed max-w-3xl">
                 Hey, I'm <span className="text-white font-bold">Iqbal</span> — a
-                dedicated Full Stack Developer with a passion for building
+                dedicated Software Engineer with a passion for building
                 high-performance web applications. I specialize in the{" "}
                 <span className="text-white font-semibold">
                   MERN Stack & PHP
@@ -167,7 +167,7 @@ const About = () => {
                   TeamCipher
                 </h4>
                 <p className="text-[10px] md:text-sm text-slate-500 font-medium">
-                  Web Developer
+                  Software Engineer
                 </p>
               </div>
             </div>

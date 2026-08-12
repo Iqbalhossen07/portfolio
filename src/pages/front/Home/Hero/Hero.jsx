@@ -7,7 +7,7 @@ import Link from "next/link";
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const phrases = [
-    "Full Stack Developer",
+    "Software Engineer",
     "React & Laravel Expert",
     "API Builder",
     "UI/UX Enthusiast",
@@ -213,7 +213,7 @@ const Hero = () => {
         <div className="inline-flex items-center gap-2 px-5 py-2 rounded-md border border-white/15 bg-white/5 backdrop-blur-md mb-8">
           <span className="w-2 h-2 bg-green-400 animate-pulse inline-block"></span>
           <span className="text-xs md:text-sm font-semibold text-[#C7C9FF]">
-            Open to work &nbsp;·&nbsp; Full Stack Developer ✨
+            Open to work &nbsp;·&nbsp; Software Engineer ✨
           </span>
         </div>
 

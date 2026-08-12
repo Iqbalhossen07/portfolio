@@ -60,7 +60,7 @@ const AboutPage = () => {
 
   const experiences = [
     {
-      role: "Full Stack Developer (Remote)",
+      role: "Software Engineer (Remote)",
       company: "SetsTech",
       period: "2025 — Present",
       desc: "Leading the development of scalable web applications using the MERN stack. Architecting robust backend solutions and crafting intuitive user interfaces.",
@@ -69,7 +69,7 @@ const AboutPage = () => {
       current: true,
     },
     {
-      role: "Full Stack Developer (Remote)",
+      role: "Software Engineer (Remote)",
       company: "TeamCipher",
       period: "2024 — 2025",
       desc: "Developed and maintained complex web platforms using PHP and the MERN stack. Collaborated with teams to deliver secure digital products.",

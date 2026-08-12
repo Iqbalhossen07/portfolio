@@ -44,7 +44,7 @@ const Services = () => {
       icon: "fa-layer-group",
       title: "Full Stack Projects",
       tagline: "End-to-end ownership.",
-      desc: "I take full ownership of your project — UI to database, auth to deployment. One developer, zero handoff headaches.",
+      desc: "I take full ownership of your project — UI to database, auth to deployment. One engineer, zero handoff headaches.",
       gfrom: "#10b981",
       gto: "#059669",
       glow: "rgba(16,185,129,0.35)",

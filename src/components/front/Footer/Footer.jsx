@@ -57,7 +57,7 @@ const Footer = () => {
                 />
               </Link>
               <p className="text-slate-500 text-sm leading-relaxed max-w-sm">
-                Full Stack Web Developer & Digital Creative based in Bangladesh.
+                Software Engineer & Digital Creative based in Bangladesh.
                 Building fast, scalable, and beautiful digital products — one
                 project at a time.
               </p>

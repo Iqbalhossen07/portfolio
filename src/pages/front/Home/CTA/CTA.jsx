@@ -67,7 +67,7 @@ const CTA = () => {
             </div>
 
             <h2 className="text-xl md:text-4xl font-black text-white leading-[1.1] tracking-tight mb-4 px-2">
-              Looking for a dedicated developer?
+              Looking for a dedicated Software Engineer?
               <br className="hidden md:block" />
               <span
                 style={{
