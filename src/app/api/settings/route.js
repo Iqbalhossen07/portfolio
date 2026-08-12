@@ -17,15 +17,28 @@ export async function GET() {
 
 export async function PUT(request) {
   try {
-    const body = await request.json();
-    const { fullName, email, password } = body;
+    const formData = await request.formData();
+    const fullName = formData.get("fullName");
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const avatarFile = formData.get("avatar");
     
     let user = await prisma.user.findFirst();
     
     const dataToUpdate = { fullName, email };
-    // Only update password if a new one is provided
+    
+    // Process password if provided
     if (password && password.trim() !== "") {
-      dataToUpdate.password = password; // Note: In a real app, hash this password!
+      const bcrypt = require("bcryptjs");
+      dataToUpdate.password = await bcrypt.hash(password, 10);
+    }
+    
+    // Process avatar if provided
+    if (avatarFile && typeof avatarFile !== "string") {
+      const { uploadToCloudinary } = await import("@/lib/cloudinary");
+      const buffer = Buffer.from(await avatarFile.arrayBuffer());
+      const upload = await uploadToCloudinary(buffer, "portfolio/admin");
+      dataToUpdate.avatar = upload.secure_url;
     }
 
     if (user) {
@@ -38,7 +51,7 @@ export async function PUT(request) {
         data: {
           fullName,
           email,
-          password: password || "123456", // Default fallback if creating first user
+          ...dataToUpdate
         },
       });
     }

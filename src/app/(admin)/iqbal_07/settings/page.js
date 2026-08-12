@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 
 export default function UserSettings() {
-  const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
+  const [formData, setFormData] = useState({ fullName: "", email: "", password: "", avatar: "" });
+  const [avatarFile, setAvatarFile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -15,7 +16,7 @@ export default function UserSettings() {
       const res = await fetch("/api/settings");
       if (res.ok) {
         const data = await res.json();
-        setFormData({ fullName: data.fullName || "", email: data.email || "", password: "" });
+        setFormData({ fullName: data.fullName || "", email: data.email || "", password: "", avatar: data.avatar || "" });
       }
     } catch (error) {
       console.error(error);
@@ -26,14 +27,29 @@ export default function UserSettings() {
 
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setAvatarFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSaving(true);
     try {
+      const data = new FormData();
+      data.append("fullName", formData.fullName);
+      data.append("email", formData.email);
+      if (formData.password) {
+        data.append("password", formData.password);
+      }
+      if (avatarFile) {
+        data.append("avatar", avatarFile);
+      }
+
       const res = await fetch("/api/settings", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: data,
       });
       if (res.ok) {
         alert("Settings saved successfully!");
@@ -59,12 +75,22 @@ export default function UserSettings() {
 
       <form onSubmit={handleSubmit} className="space-y-6 bg-white/5 border border-white/5 p-8 rounded-xl">
         <div className="flex items-center gap-6 mb-6">
-          <div className="w-20 h-20 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-black text-3xl">
-            {formData.fullName ? formData.fullName.charAt(0).toUpperCase() : "A"}
+          <div className="w-20 h-20 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center font-black text-3xl overflow-hidden relative group">
+            {avatarFile ? (
+              <img src={URL.createObjectURL(avatarFile)} alt="Avatar Preview" className="w-full h-full object-cover" />
+            ) : formData.avatar ? (
+              <img src={formData.avatar} alt="Current Avatar" className="w-full h-full object-cover" />
+            ) : (
+              formData.fullName ? formData.fullName.charAt(0).toUpperCase() : "A"
+            )}
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+              <i className="fa-solid fa-camera text-white text-xl"></i>
+            </div>
+            <input type="file" accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Profile Picture</h3>
-            <p className="text-xs text-slate-500 mt-1">Avatar feature coming soon.</p>
+            <p className="text-xs text-slate-500 mt-1">Click the image to upload a new avatar.</p>
           </div>
         </div>
 
