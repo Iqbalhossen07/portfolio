@@ -39,7 +39,9 @@ const Navbar = () => {
 
           <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => {
-              const isActive = pathname === link.path || (link.path !== '/' && pathname.startsWith(link.path));
+              const isActive = pathname === link.path || 
+                (link.path !== '/' && pathname.startsWith(link.path)) ||
+                (link.name === 'Projects' && pathname.startsWith('/project-details'));
               return (
                 <Link
                   key={link.name}
@@ -86,7 +88,9 @@ const Navbar = () => {
               className="md:hidden absolute top-full left-4 right-4 mt-2 bg-[#0a0a0a] border border-white/10 rounded-md p-6 space-y-4 shadow-2xl pointer-events-auto"
             >
               {navLinks.map((link) => {
-                const isActive = pathname === link.path || (link.path !== '/' && pathname.startsWith(link.path));
+                const isActive = pathname === link.path || 
+                  (link.path !== '/' && pathname.startsWith(link.path)) ||
+                  (link.name === 'Projects' && pathname.startsWith('/project-details'));
                 return (
                   <Link
                     key={link.name}
